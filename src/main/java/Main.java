@@ -1,9 +1,12 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Objects;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
+
     }
 
     public static boolean isElementInArray(String element, String[] strings) {
@@ -35,7 +38,13 @@ public class Main {
         return count;
     }
 
-    public static String[] readFileIntoStringArray(String filename) {
-        return new String[]{"Mark zergberg", "John Doe", "Gly marksman"};
+    public static String[] readFileIntoStringArray(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            return reader.lines().toArray(String[]::new);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return new String[0];
     }
 }
