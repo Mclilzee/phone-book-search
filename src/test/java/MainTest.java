@@ -1,8 +1,15 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class MainTest {
+
+    BufferedReader reader = mock(BufferedReader.class);
 
     @Test
     void checkIfElementIsInArray() {
@@ -40,5 +47,14 @@ class MainTest {
         assertEquals(0, Main.countSubArrayElements(null, null));
     }
 
+    @Test
+    void getStringArrayFromFile() {
+        when(reader.lines()).thenReturn(Stream.of("Mark zergberg", "John Doe", "Gly marksman"));
+        String[] expected = new String[]{"Mark zergberg", "John Doe", "Gly marksman"};
+        assertArrayEquals(expected, Main.readFileIntoStringArray("filename"));
 
+        when(reader.lines()).thenReturn(Stream.of("John doe", "Emad doubleman"));
+        String[] secondExpected = new String[]{"John doe", "Emad doubleman"};
+        assertArrayEquals(secondExpected, Main.readFileIntoStringArray("filename"));
+    }
 }

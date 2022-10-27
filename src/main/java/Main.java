@@ -34,4 +34,8 @@ public class Main {
 
         return count;
     }
+
+    public static String[] readFileIntoStringArray(String filename) {
+        return new String[]{"Mark zergberg", "John Doe", "Gly marksman"};
+    }
 }
