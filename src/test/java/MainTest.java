@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,5 +47,33 @@ class MainTest {
         String[] expected = new String[]{"Mark zergberg", "John Doe", "Gly marksman"};
         assertArrayEquals(expected, Main.readFileIntoStringArray("./src/test/java/sample.txt"));
         assertArrayEquals(new String[0], Main.readFileIntoStringArray("imaginaryfile"));
+    }
+
+    @Test
+    void getProperMessageWithMinutes() {
+        Duration start = Duration.ofSeconds(60);
+        Duration end = Duration.ofSeconds(300);
+
+        String message = Main.getFormattedMessage(start, end, 400, 500);
+        String expected = "Found 400 / 500 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        assertEquals(expected, message);
+    }
+    @Test
+    void getProperMessageWithSeconds() {
+        Duration start = Duration.ofSeconds(60);
+        Duration end = Duration.ofSeconds(320);
+
+        String message = Main.getFormattedMessage(start, end, 400, 500);
+        String expected = "Found 400 / 500 entries. Time taken: 4 min. 20 sec. 0 ms.";
+        assertEquals(expected, message);
+    }
+    @Test
+    void getProperMessageWithMillis() {
+        Duration start = Duration.ofSeconds(60);
+        Duration end = Duration.ofMillis(320020);
+
+        String message = Main.getFormattedMessage(start, end, 400, 500);
+        String expected = "Found 400 / 500 entries. Time taken: 4 min. 20 sec. 20 ms.";
+        assertEquals(expected, message);
     }
 }

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-10-27T23:38:59" hostname="DESKTOP-DM0E31D" time="0.027">
+<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-27T23:58:13" hostname="DESKTOP-DM0E31D" time="0.028">
   <properties/>
-  <testcase name="zeroIfArraysAreEmptyOrNull()" classname="MainTest" time="0.019"/>
+  <testcase name="zeroIfArraysAreEmptyOrNull()" classname="MainTest" time="0.016"/>
+  <testcase name="getProperMessageWithSeconds()" classname="MainTest" time="0.002"/>
   <testcase name="countElementsOfSubArray()" classname="MainTest" time="0.001"/>
+  <testcase name="getProperMessageWithMillis()" classname="MainTest" time="0.001"/>
   <testcase name="checkIfElementIsInArray()" classname="MainTest" time="0.001"/>
   <testcase name="elementIsNotInArray()" classname="MainTest" time="0.001"/>
-  <testcase name="getStringArrayFromFile()" classname="MainTest" time="0.005"/>
+  <testcase name="getProperMessageWithMinutes()" classname="MainTest" time="0.001"/>
+  <testcase name="getStringArrayFromFile()" classname="MainTest" time="0.004"/>
   <system-out><![CDATA[imaginaryfile (The system cannot find the file specified)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
