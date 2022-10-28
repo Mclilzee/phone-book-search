@@ -6,20 +6,24 @@ import java.time.Duration;
 
 public abstract class Searcher {
 
-    private String[] searchableDirectory;
-    private String[] toFind;
+    protected String[] searchableFile;
+    protected String[] toFind;
 
-    protected Searcher(File toFind, File searchableDirectory) {
-        this.searchableDirectory = readFileIntoStringArray(searchableDirectory);
+    protected Searcher(File toFind, File searchableFile) {
+        this.searchableFile = readFileIntoStringArray(searchableFile);
         this.toFind = readFileIntoStringArray(toFind);
     }
 
-    public abstract String search();
+    public String search() {
+        Duration startDuration = Duration.ofMillis(System.currentTimeMillis());
+        System.out.println("Start searching...");
 
-    protected abstract int foundSubArrayElements();
-    protected abstract boolean isElementInArray();
+        int found = foundSubArrayElements();
+        Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
+        return getFormattedMessage(startDuration, endDuration, found);
+    }
 
-    protected static String[] readFileIntoStringArray(File file) {
+    protected String[] readFileIntoStringArray(File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.lines().toArray(String[]::new);
         } catch (IOException e) {
@@ -29,10 +33,14 @@ public abstract class Searcher {
         return new String[0];
     }
 
-    protected static String getFormattedMessage(Duration start, Duration end, int found, int total) {
+    protected String getFormattedMessage(Duration start, Duration end, int found) {
         Duration duration = end.minus(start);
 
         return String.format("Found %d / %d entries. Time taken: %d min. %d sec. %d ms.",
-                found, total, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
+                found, this.toFind.length, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
     }
+
+    protected abstract int foundSubArrayElements();
+
+    protected abstract boolean isElementInSearchableFile(String element);
 }

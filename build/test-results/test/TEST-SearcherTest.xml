@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SearcherTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-28T06:00:10" hostname="DESKTOP-DM0E31D" time="0.036">
+  <properties/>
+  <testcase name="getProperMessageWithSeconds()" classname="SearcherTest" time="0.012"/>
+  <testcase name="getProperMessageWithCorrectFound()" classname="SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithCorrectTotal()" classname="SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithMillis()" classname="SearcherTest" time="0.0"/>
+  <testcase name="searchFunctionReturnsProperMessage()" classname="SearcherTest" time="0.007"/>
+  <testcase name="getEmptyArrayIfFileDoesNotExit()" classname="SearcherTest" time="0.002"/>
+  <testcase name="getProperMessageWithMinutes()" classname="SearcherTest" time="0.001"/>
+  <testcase name="getStringArrayFromFile()" classname="SearcherTest" time="0.002"/>
+  <system-out><![CDATA[Start searching...
+imaginaryFile (The system cannot find the file specified)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
