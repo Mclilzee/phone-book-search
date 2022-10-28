@@ -27,19 +27,19 @@ class MainTest {
     void countElementsOfSubArray() {
         String[] array = new String[]{"java", "C++", "C", "Python", "Ruby"};
         String[] subArray = new String[]{"java", "C", "Rust"};
-        assertEquals(2, Main.countSubArrayElements(subArray, array));
+        assertEquals(2, Main.foundSubArrayElements(subArray, array));
 
         String[] secondSubArray = new String[]{"C++", "Wizard", "Mage"};
-        assertEquals(1, Main.countSubArrayElements(secondSubArray, array));
+        assertEquals(1, Main.foundSubArrayElements(secondSubArray, array));
     }
 
     @Test
     void zeroIfArraysAreEmptyOrNull() {
-        assertEquals(0, Main.countSubArrayElements(new String[0], new String[0]));
-        assertEquals(0, Main.countSubArrayElements(new String[]{"test"}, new String[0]));
-        assertEquals(0, Main.countSubArrayElements(null, new String[0]));
-        assertEquals(0, Main.countSubArrayElements(new String[0], null));
-        assertEquals(0, Main.countSubArrayElements(null, null));
+        assertEquals(0, Main.foundSubArrayElements(new String[0], new String[0]));
+        assertEquals(0, Main.foundSubArrayElements(new String[]{"test"}, new String[0]));
+        assertEquals(0, Main.foundSubArrayElements(null, new String[0]));
+        assertEquals(0, Main.foundSubArrayElements(new String[0], null));
+        assertEquals(0, Main.foundSubArrayElements(null, null));
     }
 
     @Test

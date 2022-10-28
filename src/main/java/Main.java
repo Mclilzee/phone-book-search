@@ -11,14 +11,14 @@ public class Main {
         String[] toFind = readFileIntoStringArray("./find.txt");
 
         System.out.println("Start searching...");
-        int found = countSubArrayElements(toFind, phoneBook);
+        int found = foundSubArrayElements(toFind, phoneBook);
         Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
         System.out.println(getFormattedMessage(startDuration, endDuration, found, toFind.length));
 
 
     }
 
-    public static int countSubArrayElements(String[] subArray, String[] array) {
+    public static int foundSubArrayElements() {
         if (subArray == null || array == null) {
             return 0;
         }
