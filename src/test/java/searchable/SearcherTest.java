@@ -1,16 +1,17 @@
+package searchable;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.time.Duration;
-import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class SearcherTest {
 
-    private final File toFind = new File("./src/test/java/sampleToFind.txt");
-    private final File searchableFile = new File("./src/test/java/sampleSearchableFile.txt");
+    private final File toFind = new File("./src/test/java/searchable/sampleToFind.txt");
+    private final File searchableFile = new File("./src/test/java/searchable/sampleSearchableFile.txt");
 
     Searcher searcher = mock(Searcher.class, withSettings().useConstructor(toFind, searchableFile)
             .defaultAnswer(CALLS_REAL_METHODS));

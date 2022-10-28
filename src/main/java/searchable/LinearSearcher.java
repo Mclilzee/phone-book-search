@@ -1,3 +1,5 @@
+package searchable;
+
 import java.io.File;
 
 public class LinearSearcher extends Searcher{
@@ -7,7 +9,7 @@ public class LinearSearcher extends Searcher{
     }
 
     @Override
-    protected int foundSubArrayElements() {
+    int foundSubArrayElements() {
         int count = 0;
         for (String element : super.toFind) {
             if (isElementInSearchableFile(element)) {
@@ -19,7 +21,7 @@ public class LinearSearcher extends Searcher{
     }
 
     @Override
-    protected boolean isElementInSearchableFile(String element) {
+    boolean isElementInSearchableFile(String element) {
         for (String string : super.searchableFile) {
             if (string.contains(element)) {
                 return true;

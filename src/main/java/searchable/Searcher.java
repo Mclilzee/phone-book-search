@@ -1,3 +1,5 @@
+package searchable;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -6,10 +8,10 @@ import java.time.Duration;
 
 public abstract class Searcher {
 
-    protected String[] searchableFile;
-    protected String[] toFind;
+    String[] searchableFile;
+    String[] toFind;
 
-    protected Searcher(File toFind, File searchableFile) {
+    Searcher(File toFind, File searchableFile) {
         this.searchableFile = readFileIntoStringArray(searchableFile);
         this.toFind = readFileIntoStringArray(toFind);
     }
@@ -23,7 +25,7 @@ public abstract class Searcher {
         return getFormattedMessage(startDuration, endDuration, found);
     }
 
-    protected String[] readFileIntoStringArray(File file) {
+    String[] readFileIntoStringArray(File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.lines().toArray(String[]::new);
         } catch (IOException e) {
@@ -33,14 +35,14 @@ public abstract class Searcher {
         return new String[0];
     }
 
-    protected String getFormattedMessage(Duration start, Duration end, int found) {
+    String getFormattedMessage(Duration start, Duration end, int found) {
         Duration duration = end.minus(start);
 
         return String.format("Found %d / %d entries. Time taken: %d min. %d sec. %d ms.",
                 found, this.toFind.length, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
     }
 
-    protected abstract int foundSubArrayElements();
+    abstract int foundSubArrayElements();
 
-    protected abstract boolean isElementInSearchableFile(String element);
+    abstract boolean isElementInSearchableFile(String element);
 }
