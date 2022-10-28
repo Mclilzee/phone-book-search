@@ -11,8 +11,9 @@ public class Main {
         String[] toFind = readFileIntoStringArray("./find.txt");
 
         System.out.println("Start searching...");
-        int count = countSubArrayElements(toFind, phoneBook);
+        int found = countSubArrayElements(toFind, phoneBook);
         Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
+        System.out.println(getFormattedMessage(startDuration, endDuration, found, toFind.length));
 
 
     }

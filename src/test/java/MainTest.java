@@ -50,6 +50,26 @@ class MainTest {
     }
 
     @Test
+    void getProperMessageWithCorrectFound() {
+        Duration start = Duration.ofSeconds(60);
+        Duration end = Duration.ofSeconds(300);
+
+        String message = Main.getFormattedMessage(start, end, 250, 500);
+        String expected = "Found 250 / 500 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        assertEquals(expected, message);
+    }
+
+    @Test
+    void getProperMessageWithCorrectTotal() {
+        Duration start = Duration.ofSeconds(60);
+        Duration end = Duration.ofSeconds(300);
+
+        String message = Main.getFormattedMessage(start, end, 250, 320);
+        String expected = "Found 250 / 320 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        assertEquals(expected, message);
+    }
+
+    @Test
     void getProperMessageWithMinutes() {
         Duration start = Duration.ofSeconds(60);
         Duration end = Duration.ofSeconds(300);
