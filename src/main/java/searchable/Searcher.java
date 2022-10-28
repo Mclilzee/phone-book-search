@@ -5,15 +5,25 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
 
 public abstract class Searcher {
 
     String[] searchableFile;
     String[] toFind;
 
-    Searcher(File toFind, File searchableFile) {
+    Searcher(File toFind, File searchableFile, boolean sorted) {
         this.searchableFile = readFileIntoStringArray(searchableFile);
         this.toFind = readFileIntoStringArray(toFind);
+
+        if (sorted) {
+            Arrays.sort(this.searchableFile);
+            Arrays.sort(this.toFind);
+        }
+    }
+
+    Searcher(File toFind, File searchableFile) {
+        this(toFind, searchableFile, false);
     }
 
     public String search() {
