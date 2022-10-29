@@ -2,9 +2,11 @@ package project.searchable;
 
 import java.time.Duration;
 
-class ContactSorter {
+public class ContactSorter {
 
-    static void bubbleSort(Contact[] array, Duration maxDuration) {
+    private static Duration maxDuration = Duration.ZERO;
+
+    static void bubbleSort(Contact[] array) {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         boolean quit = false;
         while (!quit) {
@@ -26,5 +28,13 @@ class ContactSorter {
                 }
             }
         }
+    }
+
+    public static void setMaxDuration(Duration duration) {
+        maxDuration = duration;
+    }
+
+    public static Duration getMaxDuration() {
+        return maxDuration;
     }
 }

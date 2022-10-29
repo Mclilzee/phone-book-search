@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ContactSorterTest {
 
@@ -30,13 +29,22 @@ class ContactSorterTest {
     };
 
     @Test
-    void bubbleSort() {
-        ContactSorter.bubbleSort(contacts, Duration.ofMinutes(100));
-        assertArrayEquals(contacts, expected);
+    void bubbleSorterThrowErrorWhenExceedsTime() {
+        ContactSorter.setMaxDuration(Duration.ofSeconds(-1));
+        assertThrows(RuntimeException.class, () -> ContactSorter.bubbleSort(contacts));
     }
 
     @Test
-    void bubbleSorterThrowErrorWhenExceedsTime() {
-        assertThrows(RuntimeException.class, () -> ContactSorter.bubbleSort(contacts, Duration.ofSeconds(-1)));
+    void setMaxLimitCorrectly() {
+        ContactSorter.setMaxDuration(Duration.ofDays(1));
+        assertEquals(Duration.ofDays(1), ContactSorter.getMaxDuration());
     }
+
+    @Test
+    void bubbleSort() {
+        ContactSorter.bubbleSort(contacts);
+        assertArrayEquals(contacts, expected);
+    }
+
+
 }

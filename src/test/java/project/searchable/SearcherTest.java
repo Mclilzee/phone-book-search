@@ -143,7 +143,7 @@ class SearcherTest {
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
                 Arguments.of(new LinearSearcher(searchableContacts, toFind)),
-                Arguments.of(new JumpSearcher(searchableContacts, toFind, Duration.ofDays(1)))
+                Arguments.of(new JumpSearcher(searchableContacts, toFind))
         );
     }
 }

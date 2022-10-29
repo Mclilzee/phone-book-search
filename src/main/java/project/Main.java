@@ -1,5 +1,6 @@
 package project;
 
+import project.searchable.ContactSorter;
 import project.searchable.JumpSearcher;
 import project.searchable.LinearSearcher;
 import project.searchable.Contact;
@@ -13,7 +14,8 @@ public class Main {
         System.out.println(linearSearcher.search());
         System.out.println();
 
-        JumpSearcher jumpSearcher = new JumpSearcher(SEARCHABLE_CONTACTS, TO_FIND, linearSearcher.getSearchDuration());
+        ContactSorter.setMaxDuration(linearSearcher.getSearchDuration().multipliedBy(10));
+        JumpSearcher jumpSearcher = new JumpSearcher(SEARCHABLE_CONTACTS, TO_FIND);
         System.out.println(jumpSearcher.search());
     }
 }

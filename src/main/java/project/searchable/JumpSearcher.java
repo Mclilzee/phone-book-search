@@ -5,11 +5,9 @@ import java.time.Duration;
 public class JumpSearcher extends Searcher {
 
     private boolean sortInterrupted = false;
-    private final Duration sortingLimit;
 
-    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, Duration maxSortLimit) {
+    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind) {
         super(searchableContacts, toFind);
-        this.sortingLimit = maxSortLimit;
     }
 
     @Override
@@ -44,7 +42,7 @@ public class JumpSearcher extends Searcher {
     private void bubbleSortData() {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         try {
-            ContactSorter.bubbleSort(this.searchableContacts, this.sortingLimit.multipliedBy(10));
+            ContactSorter.bubbleSort(this.searchableContacts);
         } catch (RuntimeException e) {
             sortInterrupted = true;
         } finally {
