@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public abstract class Searcher {
 
@@ -60,14 +61,18 @@ public abstract class Searcher {
 
     abstract int foundSubArrayElements();
 
-    public Record getRecordFromString(String string) {
+    Record getRecordFromString(String string) {
         String[] values = string.split(" ");
-        if (values.length == 2) {
-            return new Record(values[0], values[1]);
-        } else if (values.length == 3) {
-            return new Record(values[0], values[1], values[2]);
+        if (values[0].matches("\\d+")) {
+            return new Record(values[0], extractName(1, values));
+        } else {
+            return new Record(extractName(0, values));
         }
+    }
 
-        return new Record("", "", "");
+    private String extractName(int skip, String[] string) {
+        return Arrays.stream(string)
+                .skip(skip)
+                .collect(Collectors.joining(" "));
     }
 }

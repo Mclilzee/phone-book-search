@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RecordTest {
 
-    private Record record = new Record("1234", "John", "Doe");
+    private Record record = new Record("1234", "John Doe");
 
     @Test
     void getNumber() {
@@ -14,32 +14,21 @@ class RecordTest {
     }
 
     @Test
-    void getFirstName() {
-        assertEquals("John", record.getFirstName());
+    void getName() {
+        assertEquals("John Doe", record.getName());
     }
 
-    @Test
-    void getLastName() {
-        assertEquals("Doe", record.getLastName());
-    }
 
     @Test
-    void getFullName() {
-        assertEquals("John Doe", record.getFullName());
-    }
-
-    @Test
-    void recordCreatedWith2Parameters() {
-        record = new Record("John", "Doe");
-        assertEquals("John", record.getFirstName());
-        assertEquals("Doe", record.getLastName());
+    void recordCreatedWithOneParameters() {
+        record = new Record("John Doe");
+        assertEquals("John Doe", record.getName());
         assertEquals("", record.getNumber());
-        assertEquals("John Doe", record.getFullName());
     }
 
     @Test
     void recordsAreEqualIfTheyHaveSameFullName() {
-        Record record2 = new Record("2342342", "John", "Doe");
+        Record record2 = new Record("John Doe");
         assertEquals(record, record2);
     }
 }

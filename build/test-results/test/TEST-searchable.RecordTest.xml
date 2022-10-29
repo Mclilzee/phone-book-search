@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="searchable.RecordTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-29T06:12:46" hostname="DESKTOP-DM0E31D" time="0.005">
+<testsuite name="searchable.RecordTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-10-29T06:45:05" hostname="DESKTOP-DM0E31D" time="0.003">
   <properties/>
   <testcase name="recordsAreEqualIfTheyHaveSameFullName()" classname="searchable.RecordTest" time="0.001"/>
-  <testcase name="getFullName()" classname="searchable.RecordTest" time="0.001"/>
-  <testcase name="getFirstName()" classname="searchable.RecordTest" time="0.001"/>
-  <testcase name="getLastName()" classname="searchable.RecordTest" time="0.001"/>
+  <testcase name="getName()" classname="searchable.RecordTest" time="0.0"/>
   <testcase name="getNumber()" classname="searchable.RecordTest" time="0.0"/>
-  <testcase name="recordCreatedWith2Parameters()" classname="searchable.RecordTest" time="0.0"/>
+  <testcase name="recordCreatedWithOneParameters()" classname="searchable.RecordTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

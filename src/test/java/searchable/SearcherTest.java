@@ -17,10 +17,10 @@ class SearcherTest {
             .defaultAnswer(CALLS_REAL_METHODS));
 
     @Test
-    void getStringArrayFromFile() {
+    void getRecordArray() {
         Record[] expected = new Record[]{
-                new Record("Gly", "marksman"),
-                new Record("2341", "Emad", "doblos")
+                new Record("Gly marksman"),
+                new Record("2341", "Emad doblos")
         };
         assertArrayEquals(expected, searcher.readFileToRecordArray(toFind));
     }
@@ -103,7 +103,10 @@ class SearcherTest {
 
     @Test
     void getRecordFromStringTest() {
-        Record expected = new Record("John", "Doe");
+        Record expected = new Record("123", "John Doe");
         Record actual = searcher.getRecordFromString("John Doe");
+        Record actual2 = searcher.getRecordFromString("123534 John Doe");
+        assertEquals(expected, actual);
+        assertEquals(expected, actual2);
     }
 }

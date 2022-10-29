@@ -3,34 +3,24 @@ package searchable;
 import java.util.Objects;
 
 public class Record {
-    private String phoneNumber;
-    private String firstName;
-    private String lastName;
+    private final String phoneNumber;
+    private final String name;
 
-    public Record(String phoneNumber, String firstName, String lastName) {
+    public Record(String phoneNumber, String name) {
         this.phoneNumber = phoneNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
     }
 
-    public Record(String firstName, String lastName) {
-        this("", firstName, lastName);
+    public Record(String name) {
+        this("", name);
     }
 
     public String getNumber() {
         return this.phoneNumber;
     }
 
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -38,11 +28,11 @@ public class Record {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Record record = (Record) o;
-        return Objects.equals(getFullName(), record.getFullName());
+        return name.equalsIgnoreCase(record.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFullName());
+        return Objects.hash(name);
     }
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="searchable.SearcherTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-10-29T06:12:46" hostname="DESKTOP-DM0E31D" time="0.068">
+<testsuite name="searchable.SearcherTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-10-29T06:45:05" hostname="DESKTOP-DM0E31D" time="0.044">
   <properties/>
-  <testcase name="getProperMessageWithSeconds()" classname="searchable.SearcherTest" time="0.035"/>
-  <testcase name="getProperMessageWithCorrectFound()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="getProperMessageWithCorrectTotal()" classname="searchable.SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithSeconds()" classname="searchable.SearcherTest" time="0.016"/>
+  <testcase name="getProperMessageWithCorrectFound()" classname="searchable.SearcherTest" time="0.002"/>
+  <testcase name="getProperMessageWithCorrectTotal()" classname="searchable.SearcherTest" time="0.0"/>
   <testcase name="getProperMessageWithMillis()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="searchFunctionReturnsProperMessage()" classname="searchable.SearcherTest" time="0.003"/>
-  <testcase name="getEmptyArrayIfFileDoesNotExit()" classname="searchable.SearcherTest" time="0.002"/>
-  <testcase name="getRecordFromStringTest()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="getProperMessageWithMinutes()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="getStringArrayFromFile()" classname="searchable.SearcherTest" time="0.008"/>
+  <testcase name="searchFunctionReturnsProperMessage()" classname="searchable.SearcherTest" time="0.004"/>
+  <testcase name="getEmptyArrayIfFileDoesNotExit()" classname="searchable.SearcherTest" time="0.004"/>
+  <testcase name="getRecordArray()" classname="searchable.SearcherTest" time="0.001"/>
+  <testcase name="getRecordFromStringTest()" classname="searchable.SearcherTest" time="0.002"/>
+  <testcase name="getProperMessageWithMinutes()" classname="searchable.SearcherTest" time="0.002"/>
   <system-out><![CDATA[null
 imaginaryFile (The system cannot find the file specified)
 ]]></system-out>
