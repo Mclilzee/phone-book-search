@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="project.searchable.SearcherTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-29T12:41:58" hostname="DESKTOP-DM0E31D" time="0.076">
+  <properties/>
+  <testcase name="getProperMessageWithSeconds()" classname="project.searchable.SearcherTest" time="0.015"/>
+  <testcase name="getProperDurationStringWithMillis()" classname="project.searchable.SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithCorrectFound()" classname="project.searchable.SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithCorrectTotal()" classname="project.searchable.SearcherTest" time="0.001"/>
+  <testcase name="[1] project.searchable.LinearSearcher@6f8f8a80" classname="project.searchable.SearcherTest" time="0.022"/>
+  <testcase name="[2] project.searchable.JumpSearcher@4e38d975" classname="project.searchable.SearcherTest" time="0.001"/>
+  <testcase name="numberOfElementsFound()" classname="project.searchable.SearcherTest" time="0.0"/>
+  <testcase name="getProperMessageWithMinutes()" classname="project.searchable.SearcherTest" time="0.001"/>
+  <system-out><![CDATA[called once
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
