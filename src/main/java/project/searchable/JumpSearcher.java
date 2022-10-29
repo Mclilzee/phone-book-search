@@ -13,18 +13,16 @@ public class JumpSearcher extends Searcher {
     }
 
     @Override
-    String search() {
+    public String search() {
         bubbleSortData();
         String message;
         if (!sortInterrupted) {
-            Duration searchingStart = Duration.ofMillis(System.currentTimeMillis());
-            super.findElements();
-            Duration searchingEnd = Duration.ofMillis(System.currentTimeMillis());
-            setSearchDuration(searchingStart, searchingEnd);
+            this.findElements();
             message = searchingMessage(this);
         } else {
             LinearSearcher searcher = new LinearSearcher(searchableRecords, toFind);
             searcher.findElements();
+            searcher.setSortingDuration(this.sortingDuration);
             message = searchingMessage(searcher);
         }
 
@@ -38,7 +36,7 @@ public class JumpSearcher extends Searcher {
         if (searcher instanceof LinearSearcher) {
             builder.append(" - STOPPED, moved to linear search");
         }
-        builder.append("\nSearching time: ").append(getDurationString(searchDuration));
+        builder.append("\nSearching time: ").append(getDurationString(searcher.searchDuration));
 
         return builder.toString();
     }
@@ -46,7 +44,7 @@ public class JumpSearcher extends Searcher {
     private void bubbleSortData() {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         try {
-            RecordSorter.bubbleSort(super.searchableRecords, this.sortingLimit.multipliedBy(10));
+            RecordSorter.bubbleSort(this.searchableRecords, this.sortingLimit.multipliedBy(10));
         } catch (RuntimeException e) {
             sortInterrupted = true;
         } finally {
@@ -59,10 +57,10 @@ public class JumpSearcher extends Searcher {
     boolean isElementInSearchableFile(Record element) {
         int current = 0;
         int previous = 0;
-        int skip = (int) Math.sqrt(super.searchableRecords.length);
-        int last = super.searchableRecords.length - 1;
+        int skip = (int) Math.sqrt(this.searchableRecords.length);
+        int last = this.searchableRecords.length - 1;
 
-        while (element.compareTo(super.searchableRecords[current]) > 0) {
+        while (element.compareTo(this.searchableRecords[current]) > 0) {
             if (current == last) {
                 return false;
             }
@@ -71,7 +69,7 @@ public class JumpSearcher extends Searcher {
             current = Math.min(last, current + skip);
         }
 
-        while (element.compareTo(super.searchableRecords[current]) < 0) {
+        while (element.compareTo(this.searchableRecords[current]) < 0) {
             current--;
 
             if (current == previous) {
@@ -79,6 +77,6 @@ public class JumpSearcher extends Searcher {
             }
         }
 
-        return element.equals(super.searchableRecords[current]);
+        return element.equals(this.searchableRecords[current]);
     }
 }

@@ -23,7 +23,7 @@ abstract class Searcher {
         return this.searchDuration;
     }
 
-    public void setSearchDuration(Duration start, Duration end) {
+    void setSearchDuration(Duration start, Duration end) {
         this.searchDuration = end.minus(start);
     }
 
@@ -32,7 +32,11 @@ abstract class Searcher {
     }
 
     void setSortingDuration(Duration start, Duration end) {
-        this.sortingDuration = end.minus(start);
+        setSortingDuration(end.minus(start));
+    }
+
+    void setSortingDuration(Duration duration) {
+        this.sortingDuration = duration;
     }
 
     int getFound() {
@@ -40,9 +44,12 @@ abstract class Searcher {
     }
 
     void findElements() {
+        Duration start = Duration.ofMillis(System.currentTimeMillis());
         this.found = Arrays.stream(toFind)
                 .filter(this::isElementInSearchableFile)
                 .collect(collectingAndThen(counting(), Long::intValue));
+        Duration end = Duration.ofMillis(System.currentTimeMillis());
+        setSearchDuration(start, end);
     }
 
     String getFoundMessage() {
@@ -56,7 +63,7 @@ abstract class Searcher {
         return String.format("%d min. %d sec. %d ms.", duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
     }
 
-    abstract String search();
+    abstract public String search();
 
     abstract boolean isElementInSearchableFile(Record element);
 }

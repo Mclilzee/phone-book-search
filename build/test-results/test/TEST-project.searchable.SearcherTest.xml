@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.searchable.SearcherTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-29T14:01:59" hostname="DESKTOP-DM0E31D" time="0.062">
+<testsuite name="project.searchable.SearcherTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-29T14:15:26" hostname="DESKTOP-DM0E31D" time="0.077">
   <properties/>
-  <testcase name="getProperMessageWithSeconds()" classname="project.searchable.SearcherTest" time="0.014"/>
+  <testcase name="getProperMessageWithSeconds()" classname="project.searchable.SearcherTest" time="0.028"/>
   <testcase name="getProperDurationStringWithMillis()" classname="project.searchable.SearcherTest" time="0.001"/>
-  <testcase name="getProperMessageWithCorrectFound()" classname="project.searchable.SearcherTest" time="0.001"/>
-  <testcase name="getProperMessageWithCorrectTotal()" classname="project.searchable.SearcherTest" time="0.001"/>
-  <testcase name="[1] project.searchable.LinearSearcher@1d207fad" classname="project.searchable.SearcherTest" time="0.018"/>
-  <testcase name="[2] project.searchable.JumpSearcher@43826ec" classname="project.searchable.SearcherTest" time="0.001"/>
-  <testcase name="findElements()" classname="project.searchable.SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithCorrectFound()" classname="project.searchable.SearcherTest" time="0.002"/>
+  <testcase name="getProperMessageWithCorrectTotal()" classname="project.searchable.SearcherTest" time="0.0"/>
+  <testcase name="[1] project.searchable.LinearSearcher@1b32cd16" classname="project.searchable.SearcherTest" time="0.017"/>
+  <testcase name="[2] project.searchable.JumpSearcher@5d1e09bc" classname="project.searchable.SearcherTest" time="0.0"/>
+  <testcase name="findElements()" classname="project.searchable.SearcherTest" time="0.0"/>
   <testcase name="searchDuration()" classname="project.searchable.SearcherTest" time="0.001"/>
   <testcase name="sortingDuration()" classname="project.searchable.SearcherTest" time="0.001"/>
-  <testcase name="getProperMessageWithMinutes()" classname="project.searchable.SearcherTest" time="0.001"/>
+  <testcase name="getProperMessageWithMinutes()" classname="project.searchable.SearcherTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

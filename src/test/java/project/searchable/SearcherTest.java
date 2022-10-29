@@ -57,7 +57,7 @@ class SearcherTest {
     void findElements() {
         Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
             @Override
-            String search() {
+            public String search() {
                 return null;
             }
 
@@ -75,7 +75,7 @@ class SearcherTest {
     void getProperMessageWithCorrectFound() {
         Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
             @Override
-            String search() {
+            public String search() {
                 return null;
             }
 
@@ -85,8 +85,8 @@ class SearcherTest {
             }
         };
 
-        specificSearcher.searchDuration = Duration.ofSeconds(240);
         specificSearcher.findElements();
+        specificSearcher.searchDuration = Duration.ofSeconds(240);
         String message = specificSearcher.getFoundMessage();
         String expected = "Found 2 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
         assertEquals(expected, message);

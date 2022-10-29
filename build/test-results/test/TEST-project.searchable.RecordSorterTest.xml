@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.searchable.RecordSorterTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-29T14:01:58" hostname="DESKTOP-DM0E31D" time="0.002">
+<testsuite name="project.searchable.RecordSorterTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-29T14:15:26" hostname="DESKTOP-DM0E31D" time="0.002">
   <properties/>
   <testcase name="bubbleSort()" classname="project.searchable.RecordSorterTest" time="0.0"/>
   <testcase name="bubbleSorterThrowErrorWhenExceedsTime()" classname="project.searchable.RecordSorterTest" time="0.001"/>
