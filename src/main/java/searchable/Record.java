@@ -1,5 +1,7 @@
 package searchable;
 
+import java.util.Objects;
+
 public class Record {
     private String phoneNumber;
     private String firstName;
@@ -29,5 +31,18 @@ public class Record {
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Record record = (Record) o;
+        return Objects.equals(getFullName(), record.getFullName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFullName());
     }
 }

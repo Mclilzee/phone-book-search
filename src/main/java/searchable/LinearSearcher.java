@@ -11,7 +11,7 @@ public class LinearSearcher extends Searcher {
     @Override
     int foundSubArrayElements() {
         int count = 0;
-        for (String element : super.toFind) {
+        for (Record element : super.toFind) {
             if (isElementInSearchableFile(element)) {
                 count++;
             }
@@ -21,9 +21,9 @@ public class LinearSearcher extends Searcher {
     }
 
     @Override
-    boolean isElementInSearchableFile(String element) {
-        for (String string : super.searchableFile) {
-            if (string.contains(element)) {
+    boolean isElementInSearchableFile(Record element) {
+        for (Record record : super.searchableFile) {
+            if (record.equals(element)) {
                 return true;
             }
         }

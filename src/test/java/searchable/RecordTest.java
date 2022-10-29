@@ -28,4 +28,18 @@ class RecordTest {
         assertEquals("John Doe", record.getFullName());
     }
 
+    @Test
+    void recordCreatedWith2Parameters() {
+        record = new Record("John", "Doe");
+        assertEquals("John", record.getFirstName());
+        assertEquals("Doe", record.getLastName());
+        assertEquals("", record.getNumber());
+        assertEquals("John Doe", record.getFullName());
+    }
+
+    @Test
+    void recordsAreEqualIfTheyHaveSameFullName() {
+        Record record2 = new Record("2342342", "John", "Doe");
+        assertEquals(record, record2);
+    }
 }

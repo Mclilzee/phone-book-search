@@ -9,12 +9,12 @@ import java.util.Arrays;
 
 public abstract class Searcher {
 
-    String[] searchableFile;
-    String[] toFind;
+    Record[] searchableFile;
+    Record[] toFind;
 
     Searcher(File toFind, File searchableFile, boolean sorted) {
-        this.searchableFile = readFileIntoStringArray(searchableFile);
-        this.toFind = readFileIntoStringArray(toFind);
+        this.searchableFile = readFileToRecordArray(searchableFile);
+        this.toFind = readFileToRecordArray(toFind);
 
         if (sorted) {
             Arrays.sort(this.searchableFile);
@@ -35,14 +35,16 @@ public abstract class Searcher {
         return getFormattedMessage(startDuration, endDuration, found);
     }
 
-    String[] readFileIntoStringArray(File file) {
+    Record[] readFileToRecordArray(File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            return reader.lines().toArray(String[]::new);
+            return reader.lines()
+                    .map(this::getRecordFromString)
+                    .toArray(Record[]::new);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-        return new String[0];
+        return new Record[0];
     }
 
     String getFormattedMessage(Duration start, Duration end, int found) {
@@ -52,9 +54,20 @@ public abstract class Searcher {
                 found, this.toFind.length, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
     }
 
+    abstract boolean isElementInSearchableFile(Record element);
+
     abstract String getSearchingMessage();
 
     abstract int foundSubArrayElements();
 
-    abstract boolean isElementInSearchableFile(String element);
+    public Record getRecordFromString(String string) {
+        String[] values = string.split(" ");
+        if (values.length == 2) {
+            return new Record(values[0], values[1]);
+        } else if (values.length == 3) {
+            return new Record(values[0], values[1], values[2]);
+        }
+
+        return new Record("", "", "");
+    }
 }

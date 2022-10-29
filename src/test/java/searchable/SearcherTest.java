@@ -18,13 +18,16 @@ class SearcherTest {
 
     @Test
     void getStringArrayFromFile() {
-        String[] expected = new String[]{"Gly marksman", "Emad doblos"};
-        assertArrayEquals(expected, searcher.readFileIntoStringArray(toFind));
+        Record[] expected = new Record[]{
+                new Record("Gly", "marksman"),
+                new Record("2341", "Emad", "doblos")
+        };
+        assertArrayEquals(expected, searcher.readFileToRecordArray(toFind));
     }
 
     @Test
     void getEmptyArrayIfFileDoesNotExit() {
-        assertArrayEquals(new String[0], searcher.readFileIntoStringArray(new File("imaginaryFile")));
+        assertArrayEquals(new String[0], searcher.readFileToRecordArray(new File("imaginaryFile")));
     }
 
     @Test
@@ -86,7 +89,7 @@ class SearcherTest {
             }
 
             @Override
-            protected boolean isElementInSearchableFile(String element) {
+            protected boolean isElementInSearchableFile(Record element) {
                 return false;
             }
 
@@ -96,5 +99,11 @@ class SearcherTest {
             }
         };
         assertTrue(someSearcher.search().matches("Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
+    }
+
+    @Test
+    void getRecordFromStringTest() {
+        Record expected = new Record("John", "Doe");
+        Record actual = searcher.getRecordFromString("John Doe");
     }
 }

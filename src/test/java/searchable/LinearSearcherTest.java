@@ -15,8 +15,8 @@ class LinearSearcherTest {
 
     @Test
     void checkIfElementIsInArray() {
-        assertTrue(searcher.isElementInSearchableFile("John Doe"));
-        assertFalse(searcher.isElementInSearchableFile("Something man"));
+        assertTrue(searcher.isElementInSearchableFile(new Record("John", "Doe")));
+        assertFalse(searcher.isElementInSearchableFile(new Record("Marksmoon", "Walker")));
     }
 
     @Test
