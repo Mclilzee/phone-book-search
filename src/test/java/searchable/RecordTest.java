@@ -18,7 +18,6 @@ class RecordTest {
         assertEquals("John Doe", record.getName());
     }
 
-
     @Test
     void recordCreatedWithOneParameters() {
         record = new Record("John Doe");
@@ -30,5 +29,15 @@ class RecordTest {
     void recordsAreEqualIfTheyHaveSameFullName() {
         Record record2 = new Record("John Doe");
         assertEquals(record, record2);
+    }
+
+    @Test
+    void compareTo() {
+        Record other = new Record("23523", "Zerg man");
+        assertTrue(record.compareTo(other) < 0);
+        assertTrue(other.compareTo(record) > 0);
+
+        Record equalRecord = new Record("John Doe");
+        assertEquals(0, equalRecord.compareTo(record));
     }
 }

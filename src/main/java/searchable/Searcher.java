@@ -48,19 +48,6 @@ public abstract class Searcher {
         return new Record[0];
     }
 
-    String getFormattedMessage(Duration start, Duration end, int found) {
-        Duration duration = end.minus(start);
-
-        return String.format("Found %d / %d entries. Time taken: %d min. %d sec. %d ms.",
-                found, this.toFind.length, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
-    }
-
-    abstract boolean isElementInSearchableFile(Record element);
-
-    abstract String getSearchingMessage();
-
-    abstract int foundSubArrayElements();
-
     Record getRecordFromString(String string) {
         String[] values = string.split(" ");
         if (values[0].matches("\\d+")) {
@@ -75,4 +62,17 @@ public abstract class Searcher {
                 .skip(skip)
                 .collect(Collectors.joining(" "));
     }
+
+    String getFormattedMessage(Duration start, Duration end, int found) {
+        Duration duration = end.minus(start);
+
+        return String.format("Found %d / %d entries. Time taken: %d min. %d sec. %d ms.",
+                found, this.toFind.length, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
+    }
+
+    abstract boolean isElementInSearchableFile(Record element);
+
+    abstract String getSearchingMessage();
+
+    abstract int foundSubArrayElements();
 }

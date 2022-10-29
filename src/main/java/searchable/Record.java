@@ -2,7 +2,7 @@ package searchable;
 
 import java.util.Objects;
 
-public class Record {
+public class Record implements Comparable<Record> {
     private final String phoneNumber;
     private final String name;
 
@@ -24,6 +24,11 @@ public class Record {
     }
 
     @Override
+    public int compareTo(Record other) {
+        return this.name.compareTo(other.name);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -35,4 +40,6 @@ public class Record {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+
 }
