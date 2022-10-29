@@ -44,7 +44,17 @@ class SearcherTest {
     }
 
     @Test
-    void numberOfElementsFound() {
+    void sortingDuration() {
+        assertEquals(Duration.ZERO, searcher.getSortingDuration());
+
+        Duration start = Duration.ofSeconds(200);
+        Duration end = Duration.ofSeconds(350);
+        searcher.setSortingDuration(start, end);
+        assertEquals(Duration.ofSeconds(150), searcher.getSortingDuration());
+    }
+
+    @Test
+    void findElements() {
         Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
             @Override
             String search() {
@@ -57,14 +67,27 @@ class SearcherTest {
             }
         };
 
-        searcher.findElements();
+        specificSearcher.findElements();
         assertEquals(2, specificSearcher.getFound());
     }
 
     @Test
     void getProperMessageWithCorrectFound() {
-        searcher.searchDuration = Duration.ofSeconds(240);
-        String message = searcher.getFoundMessage();
+        Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
+            @Override
+            String search() {
+                return null;
+            }
+
+            @Override
+            boolean isElementInSearchableFile(Record element) {
+                return true;
+            }
+        };
+
+        specificSearcher.searchDuration = Duration.ofSeconds(240);
+        specificSearcher.findElements();
+        String message = specificSearcher.getFoundMessage();
         String expected = "Found 2 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
         assertEquals(expected, message);
     }

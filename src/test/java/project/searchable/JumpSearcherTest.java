@@ -23,15 +23,6 @@ class JumpSearcherTest {
 
     JumpSearcher searcher = new JumpSearcher(searchableRecords, toFind, Duration.ofDays(1));
 
-    @Test
-    void sortingDuration() {
-        assertEquals(Duration.ZERO, searcher.getSortingDuration());
-
-        Duration start = Duration.ofSeconds(200);
-        Duration end = Duration.ofSeconds(350);
-        searcher.setSortingDuration(start, end);
-        assertEquals(Duration.ofSeconds(150), searcher.getSortingDuration());
-    }
     @Disabled
     @Test
     void getProperSearchMessage() {

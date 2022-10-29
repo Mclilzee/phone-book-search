@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.searchable.JumpSearcherTest" tests="2" skipped="1" failures="0" errors="0" timestamp="2022-10-29T13:32:05" hostname="DESKTOP-DM0E31D" time="0.006">
+<testsuite name="project.searchable.JumpSearcherTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2022-10-29T13:48:55" hostname="DESKTOP-DM0E31D" time="0.001">
   <properties/>
-  <testcase name="sortingDuration()" classname="project.searchable.JumpSearcherTest" time="0.003"/>
-  <testcase name="getProperSearchMessage()" classname="project.searchable.JumpSearcherTest" time="0.0">
+  <testcase name="getProperSearchMessage()" classname="project.searchable.JumpSearcherTest" time="0.001">
     <skipped/>
   </testcase>
   <system-out><![CDATA[]]></system-out>
