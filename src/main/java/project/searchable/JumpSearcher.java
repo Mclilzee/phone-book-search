@@ -7,8 +7,8 @@ public class JumpSearcher extends Searcher {
     private boolean sortInterrupted = false;
     private final Duration sortingLimit;
 
-    public JumpSearcher(Record[] searchableRecords, Record[] toFind, Duration maxSortLimit) {
-        super(searchableRecords, toFind);
+    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, Duration maxSortLimit) {
+        super(searchableContacts, toFind);
         this.sortingLimit = maxSortLimit;
     }
 
@@ -20,7 +20,7 @@ public class JumpSearcher extends Searcher {
             this.findElements();
             message = searchingMessage(this);
         } else {
-            LinearSearcher searcher = new LinearSearcher(searchableRecords, toFind);
+            LinearSearcher searcher = new LinearSearcher(searchableContacts, toFind);
             searcher.findElements();
             searcher.setSortingDuration(this.sortingDuration);
             message = searchingMessage(searcher);
@@ -44,7 +44,7 @@ public class JumpSearcher extends Searcher {
     private void bubbleSortData() {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         try {
-            RecordSorter.bubbleSort(this.searchableRecords, this.sortingLimit.multipliedBy(10));
+            ContactSorter.bubbleSort(this.searchableContacts, this.sortingLimit.multipliedBy(10));
         } catch (RuntimeException e) {
             sortInterrupted = true;
         } finally {
@@ -54,13 +54,13 @@ public class JumpSearcher extends Searcher {
     }
 
     @Override
-    boolean isElementInSearchableFile(Record element) {
+    boolean isElementInSearchableFile(Contact element) {
         int current = 0;
         int previous = 0;
-        int skip = (int) Math.sqrt(this.searchableRecords.length);
-        int last = this.searchableRecords.length - 1;
+        int skip = (int) Math.sqrt(this.searchableContacts.length);
+        int last = this.searchableContacts.length - 1;
 
-        while (element.compareTo(this.searchableRecords[current]) > 0) {
+        while (element.compareTo(this.searchableContacts[current]) > 0) {
             if (current == last) {
                 return false;
             }
@@ -69,7 +69,7 @@ public class JumpSearcher extends Searcher {
             current = Math.min(last, current + skip);
         }
 
-        while (element.compareTo(this.searchableRecords[current]) < 0) {
+        while (element.compareTo(this.searchableContacts[current]) < 0) {
             current--;
 
             if (current == previous) {
@@ -77,6 +77,6 @@ public class JumpSearcher extends Searcher {
             }
         }
 
-        return element.equals(this.searchableRecords[current]);
+        return element.equals(this.searchableContacts[current]);
     }
 }

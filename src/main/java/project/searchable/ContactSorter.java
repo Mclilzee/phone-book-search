@@ -2,17 +2,17 @@ package project.searchable;
 
 import java.time.Duration;
 
-class RecordSorter {
+class ContactSorter {
 
-    static void bubbleSort(Record[] array, Duration maxDuration) {
+    static void bubbleSort(Contact[] array, Duration maxDuration) {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         boolean quit = false;
         while (!quit) {
             quit = true;
 
             for (int i = 0; i < array.length - 1; i++) {
-                Record previous = array[i];
-                Record next = array[i + 1];
+                Contact previous = array[i];
+                Contact next = array[i + 1];
                 int comparingResult = previous.compareTo(next);
 
                 if (comparingResult > 0) {

@@ -10,16 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JumpSearcherTest {
 
-    private static Record[] searchableRecords;
-    private static Record[] toFind;
+    private static Contact[] searchableContacts;
+    private static Contact[] toFind;
 
     @BeforeAll
     static void setup() {
-        searchableRecords = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
+        searchableContacts = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
         toFind = RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt");
     }
 
-    JumpSearcher searcher = new JumpSearcher(searchableRecords, toFind, Duration.ofDays(1));
+    JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, Duration.ofDays(1));
 
     @Test
     void getProperSearchMessage() {
@@ -34,7 +34,7 @@ class JumpSearcherTest {
 
     @Test
     void getProperMessageWhenSortIsInterrupted() {
-        JumpSearcher searcher = new JumpSearcher(searchableRecords, toFind, Duration.ofSeconds(-1));
+        JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, Duration.ofSeconds(-1));
         String result = searcher.search();
         assertTrue(result.matches("Start searching \\(bubble sort \\+ jump search\\)\\.{3}\n" +
                 "Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +

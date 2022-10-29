@@ -2,18 +2,18 @@ package project;
 
 import project.searchable.JumpSearcher;
 import project.searchable.LinearSearcher;
-import project.searchable.Record;
+import project.searchable.Contact;
 
 public class Main {
-    private static final Record[] searchableRecords = RecordReader.readFileToRecordArray("./phonebook.txt");
-    private static final Record[] toFind = RecordReader.readFileToRecordArray("./find.txt");
+    private static final Contact[] SEARCHABLE_CONTACTS = RecordReader.readFileToRecordArray("./phonebook.txt");
+    private static final Contact[] TO_FIND = RecordReader.readFileToRecordArray("./find.txt");
 
     public static void main(String[] args) {
-        LinearSearcher linearSearcher = new LinearSearcher(searchableRecords, toFind);
+        LinearSearcher linearSearcher = new LinearSearcher(SEARCHABLE_CONTACTS, TO_FIND);
         System.out.println(linearSearcher.search());
         System.out.println();
 
-        JumpSearcher jumpSearcher = new JumpSearcher(searchableRecords, toFind, linearSearcher.getSearchDuration());
+        JumpSearcher jumpSearcher = new JumpSearcher(SEARCHABLE_CONTACTS, TO_FIND, linearSearcher.getSearchDuration());
         System.out.println(jumpSearcher.search());
     }
 }

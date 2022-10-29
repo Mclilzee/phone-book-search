@@ -16,20 +16,20 @@ import static org.mockito.Mockito.*;
 
 class SearcherTest {
 
-    private static Record[] searchableRecords;
-    private static Record[] toFind;
+    private static Contact[] searchableContacts;
+    private static Contact[] toFind;
 
     @BeforeAll
     static void setup() {
-        searchableRecords = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt"))
+        searchableContacts = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt"))
                 .sorted()
-                .toArray(Record[]::new);
+                .toArray(Contact[]::new);
         toFind = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt"))
                 .sorted()
-                .toArray(Record[]::new);
+                .toArray(Contact[]::new);
     }
 
-    Searcher searcher = mock(Searcher.class, withSettings().useConstructor(searchableRecords, toFind)
+    Searcher searcher = mock(Searcher.class, withSettings().useConstructor(searchableContacts, toFind)
             .defaultAnswer(CALLS_REAL_METHODS));
 
     @Test
@@ -55,14 +55,14 @@ class SearcherTest {
 
     @Test
     void findElements() {
-        Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
+        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
             @Override
             public String search() {
                 return null;
             }
 
             @Override
-            boolean isElementInSearchableFile(Record element) {
+            boolean isElementInSearchableFile(Contact element) {
                 return true;
             }
         };
@@ -73,14 +73,14 @@ class SearcherTest {
 
     @Test
     void getProperMessageWithCorrectFound() {
-        Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
+        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
             @Override
             public String search() {
                 return null;
             }
 
             @Override
-            boolean isElementInSearchableFile(Record element) {
+            boolean isElementInSearchableFile(Contact element) {
                 return true;
             }
         };
@@ -135,15 +135,15 @@ class SearcherTest {
     @ParameterizedTest
     @MethodSource("provideSearcher")
     void checkIfElementIsInArray(Searcher specificSearcher) {
-        assertTrue(specificSearcher.isElementInSearchableFile(new Record("123421", "John Doe")));
-        assertTrue(specificSearcher.isElementInSearchableFile(new Record("123421", "Dongos With Long Name")));
-        assertFalse(specificSearcher.isElementInSearchableFile(new Record("Marksmoon Walker")));
+        assertTrue(specificSearcher.isElementInSearchableFile(new Contact("123421", "John Doe")));
+        assertTrue(specificSearcher.isElementInSearchableFile(new Contact("123421", "Dongos With Long Name")));
+        assertFalse(specificSearcher.isElementInSearchableFile(new Contact("Marksmoon Walker")));
     }
 
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
-                Arguments.of(new LinearSearcher(searchableRecords, toFind)),
-                Arguments.of(new JumpSearcher(searchableRecords, toFind, Duration.ofDays(1)))
+                Arguments.of(new LinearSearcher(searchableContacts, toFind)),
+                Arguments.of(new JumpSearcher(searchableContacts, toFind, Duration.ofDays(1)))
         );
     }
 }

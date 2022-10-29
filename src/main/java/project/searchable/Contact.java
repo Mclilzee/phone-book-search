@@ -2,16 +2,16 @@ package project.searchable;
 
 import java.util.Objects;
 
-public class Record implements Comparable<Record> {
+public class Contact implements Comparable<Contact> {
     private final String phoneNumber;
     private final String name;
 
-    public Record(String phoneNumber, String name) {
+    public Contact(String phoneNumber, String name) {
         this.phoneNumber = phoneNumber;
         this.name = name;
     }
 
-    public Record(String name) {
+    public Contact(String name) {
         this("", name);
     }
 
@@ -24,7 +24,7 @@ public class Record implements Comparable<Record> {
     }
 
     @Override
-    public int compareTo(Record other) {
+    public int compareTo(Contact other) {
         return this.name.compareTo(other.name);
     }
 
@@ -32,8 +32,8 @@ public class Record implements Comparable<Record> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Record record = (Record) o;
-        return name.equalsIgnoreCase(record.name);
+        Contact contact = (Contact) o;
+        return name.equalsIgnoreCase(contact.name);
     }
 
     @Override

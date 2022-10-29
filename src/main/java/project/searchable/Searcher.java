@@ -8,14 +8,14 @@ import static java.util.stream.Collectors.counting;
 
 abstract class Searcher {
 
-    final Record[] searchableRecords;
-    final Record[] toFind;
+    final Contact[] searchableContacts;
+    final Contact[] toFind;
     Duration searchDuration = Duration.ZERO;
     Duration sortingDuration = Duration.ZERO;
     private int found = 0;
 
-    Searcher(Record[] searchableRecords, Record[] toFind) {
-        this.searchableRecords = searchableRecords;
+    Searcher(Contact[] searchableContacts, Contact[] toFind) {
+        this.searchableContacts = searchableContacts;
         this.toFind = toFind;
     }
 
@@ -65,5 +65,5 @@ abstract class Searcher {
 
     abstract public String search();
 
-    abstract boolean isElementInSearchableFile(Record element);
+    abstract boolean isElementInSearchableFile(Contact element);
 }
