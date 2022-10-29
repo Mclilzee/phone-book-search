@@ -16,7 +16,6 @@ class JumpSearcherTest {
     static void setup() {
         searchableRecords = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
         toFind = RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt");
-        System.out.println("called once");
     }
 
     JumpSearcher searcher = new JumpSearcher(searchableRecords, toFind);

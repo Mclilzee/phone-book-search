@@ -22,7 +22,6 @@ class SearcherTest {
     static void setup() {
         searchableRecords = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
         toFind = RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt");
-        System.out.println("called once");
     }
 
     Searcher searcher = mock(Searcher.class, withSettings().useConstructor(searchableRecords, toFind)
@@ -46,10 +45,8 @@ class SearcherTest {
 
     @Test
     void getProperMessageWithCorrectFound() {
-        Duration start = Duration.ofSeconds(60);
-        Duration end = Duration.ofSeconds(300);
-
-        String message = searcher.getFoundMessage(start, end, 250);
+        searcher.searchDuration = Duration.ofSeconds(240);
+        String message = searcher.getFoundMessage(250);
         String expected = "Found 250 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
         assertEquals(expected, message);
     }

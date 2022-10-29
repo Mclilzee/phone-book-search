@@ -10,6 +10,7 @@ abstract class Searcher {
 
     Record[] searchableRecords;
     Record[] toFind;
+    Duration searchDuration = Duration.ZERO;
 
     Searcher(Record[] searchableRecords, Record[] toFind) {
         this.searchableRecords = searchableRecords;
@@ -22,8 +23,8 @@ abstract class Searcher {
                 .collect(collectingAndThen(counting(), Long::intValue));
     }
 
-    String getFoundMessage(Duration start, Duration end, int found) {
-        String durationString = getDurationString(end.minus(start));
+    String getFoundMessage(int found) {
+        String durationString = getDurationString(searchDuration);
 
         return String.format("Found %d / %d entries. Time taken: %s",
                 found, this.toFind.length, durationString);

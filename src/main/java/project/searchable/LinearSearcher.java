@@ -8,13 +8,18 @@ public class LinearSearcher extends Searcher {
         super(searchableRecords, toFind);
     }
 
+    public Duration getSearchDuration() {
+        return super.searchDuration;
+    }
+
     @Override
     public String search() {
         Duration startDuration = Duration.ofMillis(System.currentTimeMillis());
         int found = numberOfElementsFound();
         Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
 
-        return String.format("Start searching (linear search)...\n%s", getFoundMessage(startDuration, endDuration, found));
+        searchDuration = endDuration.minus(startDuration);
+        return String.format("Start searching (linear search)...\n%s", getFoundMessage(found));
     }
 
     @Override
