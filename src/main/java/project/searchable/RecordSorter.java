@@ -1,8 +1,11 @@
 package project.searchable;
 
+import java.time.Duration;
+
 class RecordSorter {
 
-    static void bubbleSort(Record[] array) {
+    static void bubbleSort(Record[] array, Duration maxDuration) {
+        Duration start = Duration.ofMillis(System.currentTimeMillis());
         boolean quit = false;
         while (!quit) {
             quit = true;
@@ -16,6 +19,10 @@ class RecordSorter {
                     array[i] = next;
                     array[i + 1] = previous;
                     quit = false;
+                }
+
+                if (Duration.ofMillis(System.currentTimeMillis()).minus(start).compareTo(maxDuration) > 0) {
+                    throw new RuntimeException();
                 }
             }
         }

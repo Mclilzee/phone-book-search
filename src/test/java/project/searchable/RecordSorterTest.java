@@ -2,7 +2,10 @@ package project.searchable;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RecordSorterTest {
 
@@ -28,7 +31,12 @@ class RecordSorterTest {
 
     @Test
     void bubbleSort() {
-        RecordSorter.bubbleSort(records);
+        RecordSorter.bubbleSort(records, Duration.ofMinutes(100));
         assertArrayEquals(records, expected);
+    }
+
+    @Test
+    void bubbleSorterThrowErrorWhenExceedsTime() {
+        assertThrows(RuntimeException.class, () -> RecordSorter.bubbleSort(records, Duration.ofSeconds(-1)));
     }
 }

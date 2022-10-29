@@ -28,6 +28,17 @@ class SearcherTest {
             .defaultAnswer(CALLS_REAL_METHODS));
 
     @Test
+    void searchDuration() {
+        assertEquals(Duration.ZERO, searcher.getSearchDuration());
+
+        Duration start = Duration.ofSeconds(200);
+        Duration end = Duration.ofSeconds(500);
+        searcher.setSearchDuration(start, end);
+
+        assertEquals(Duration.ofSeconds(300), searcher.getSearchDuration());
+    }
+
+    @Test
     void numberOfElementsFound() {
         Searcher specificSearcher = new Searcher(searchableRecords, toFind) {
             @Override

@@ -17,6 +17,14 @@ abstract class Searcher {
         this.toFind = toFind;
     }
 
+    public Duration getSearchDuration() {
+        return this.searchDuration;
+    }
+
+    public void setSearchDuration(Duration start, Duration end) {
+        this.searchDuration = end.minus(start);
+    }
+
     int numberOfElementsFound() {
         return Arrays.stream(toFind)
                 .filter(this::isElementInSearchableFile)

@@ -6,14 +6,15 @@ public class JumpSearcher extends Searcher {
 
     public JumpSearcher(Record[] searchableRecords, Record[] toFind) {
         super(searchableRecords, toFind);
-        RecordSorter.bubbleSort(super.searchableRecords);
-        // TODO remove sort after tests
     }
 
     @Override
     String search() {
+        LinearSearcher linearSearcher = new LinearSearcher(searchableRecords, toFind);
+        Duration linerSearcherDuration = linearSearcher.getSearchDuration();
+
         Duration sortingStart = Duration.ofMillis(System.currentTimeMillis());
-        RecordSorter.bubbleSort(super.searchableRecords);
+        RecordSorter.bubbleSort(super.searchableRecords, getSearchDuration().multipliedBy(10));
         Duration sortingEnd = Duration.ofMillis(System.currentTimeMillis());
 
         Duration searchingStart = Duration.ofMillis(System.currentTimeMillis());
@@ -22,7 +23,6 @@ public class JumpSearcher extends Searcher {
 
         return "";
     }
-
 
     @Override
     boolean isElementInSearchableFile(Record element) {
