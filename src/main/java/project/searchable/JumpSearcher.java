@@ -4,17 +4,21 @@ import java.time.Duration;
 
 public class JumpSearcher extends Searcher {
 
-    public JumpSearcher(Record[] searchableRecords, Record[] toFind) {
+    private Duration sortingDuration = Duration.ZERO;
+    private boolean sortStopped = false;
+
+    public JumpSearcher(Record[] searchableRecords, Record[] toFind, Duration maxSortLimit) {
         super(searchableRecords, toFind);
+    }
+
+    void setSortingDuration(Duration start, Duration end) {
+        this.sortingDuration = end.minus(start);
     }
 
     @Override
     String search() {
-        LinearSearcher linearSearcher = new LinearSearcher(searchableRecords, toFind);
-        Duration linerSearcherDuration = linearSearcher.getSearchDuration();
-
+        bubbleSortData();
         Duration sortingStart = Duration.ofMillis(System.currentTimeMillis());
-        RecordSorter.bubbleSort(super.searchableRecords, getSearchDuration().multipliedBy(10));
         Duration sortingEnd = Duration.ofMillis(System.currentTimeMillis());
 
         Duration searchingStart = Duration.ofMillis(System.currentTimeMillis());
@@ -22,6 +26,18 @@ public class JumpSearcher extends Searcher {
         Duration searchingEnd = Duration.ofMillis(System.currentTimeMillis());
 
         return "";
+    }
+
+    private void bubbleSortData() {
+        Duration start = Duration.ofMillis(System.currentTimeMillis());
+        try {
+            RecordSorter.bubbleSort(super.searchableRecords, getSearchDuration().multipliedBy(10));
+        } catch (RuntimeException e) {
+            sortStopped = true;
+        } finally {
+            Duration end = Duration.ofMillis(System.currentTimeMillis());
+            setSortingDuration(start, end);
+        }
     }
 
     @Override
@@ -49,5 +65,9 @@ public class JumpSearcher extends Searcher {
         }
 
         return element.equals(super.searchableRecords[current]);
+    }
+
+    public Duration getSortingDuration() {
+        return this.sortingDuration;
     }
 }

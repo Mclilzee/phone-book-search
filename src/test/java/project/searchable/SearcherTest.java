@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import project.RecordReader;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,12 @@ class SearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableRecords = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
-        toFind = RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt");
+        searchableRecords = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt"))
+                .sorted()
+                .toArray(Record[]::new);
+        toFind = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt"))
+                .sorted()
+                .toArray(Record[]::new);
     }
 
     Searcher searcher = mock(Searcher.class, withSettings().useConstructor(searchableRecords, toFind)
@@ -113,7 +118,7 @@ class SearcherTest {
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
                 Arguments.of(new LinearSearcher(searchableRecords, toFind)),
-                Arguments.of(new JumpSearcher(searchableRecords, toFind))
+                Arguments.of(new JumpSearcher(searchableRecords, toFind, Duration.ofDays(1)))
         );
     }
 }
