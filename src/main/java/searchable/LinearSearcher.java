@@ -1,6 +1,7 @@
 package searchable;
 
 import java.io.File;
+import java.time.Duration;
 
 public class LinearSearcher extends Searcher {
 
@@ -9,7 +10,16 @@ public class LinearSearcher extends Searcher {
     }
 
     @Override
-    int foundSubArrayElements() {
+    public String search() {
+        Duration startDuration = Duration.ofMillis(System.currentTimeMillis());
+        int found = numberOfElementsFound();
+        Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
+
+        return String.format("Start searching (linear search)...\n%s", getFormattedMessage(startDuration, endDuration, found));
+    }
+
+    @Override
+    int numberOfElementsFound() {
         int count = 0;
         for (Record element : super.toFind) {
             if (isElementInSearchableFile(element)) {
@@ -29,10 +39,5 @@ public class LinearSearcher extends Searcher {
         }
 
         return false;
-    }
-
-    @Override
-    String getSearchingMessage() {
-        return "Start searching (linear search)...";
     }
 }

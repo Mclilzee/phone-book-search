@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="searchable.SearcherTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-10-29T07:10:09" hostname="DESKTOP-DM0E31D" time="0.038">
+<testsuite name="searchable.SearcherTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-29T07:45:26" hostname="DESKTOP-DM0E31D" time="0.038">
   <properties/>
-  <testcase name="getProperMessageWithSeconds()" classname="searchable.SearcherTest" time="0.016"/>
+  <testcase name="getProperMessageWithSeconds()" classname="searchable.SearcherTest" time="0.018"/>
+  <testcase name="getProperDurationStringWithMillis()" classname="searchable.SearcherTest" time="0.001"/>
   <testcase name="getProperMessageWithCorrectFound()" classname="searchable.SearcherTest" time="0.001"/>
   <testcase name="getProperMessageWithCorrectTotal()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="getProperMessageWithMillis()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="searchFunctionReturnsProperMessage()" classname="searchable.SearcherTest" time="0.005"/>
-  <testcase name="getEmptyArrayIfFileDoesNotExit()" classname="searchable.SearcherTest" time="0.001"/>
-  <testcase name="getRecordArray()" classname="searchable.SearcherTest" time="0.002"/>
+  <testcase name="getEmptyArrayIfFileDoesNotExit()" classname="searchable.SearcherTest" time="0.005"/>
+  <testcase name="getRecordArray()" classname="searchable.SearcherTest" time="0.001"/>
   <testcase name="getRecordFromStringTest()" classname="searchable.SearcherTest" time="0.002"/>
-  <testcase name="getProperMessageWithMinutes()" classname="searchable.SearcherTest" time="0.0"/>
-  <system-out><![CDATA[null
-imaginaryFile (The system cannot find the file specified)
+  <testcase name="getProperMessageWithMinutes()" classname="searchable.SearcherTest" time="0.001"/>
+  <system-out><![CDATA[imaginaryFile (The system cannot find the file specified)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

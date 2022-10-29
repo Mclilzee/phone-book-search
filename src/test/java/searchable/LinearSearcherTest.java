@@ -21,11 +21,13 @@ class LinearSearcherTest {
 
     @Test
     void countElementsOfSubArray() {
-        assertEquals(2, searcher.foundSubArrayElements());
+        assertEquals(2, searcher.numberOfElementsFound());
     }
 
     @Test
-    void getSearchingMessage() {
-        assertEquals("Start searching (linear search)...", searcher.getSearchingMessage());
+    void searchFunctionReturnCorrectString() {
+        String result = searcher.search();
+        assertTrue(searcher.search().matches("Start searching \\(linear search\\)\\.{3}\\n" +
+                "Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
     }
 }

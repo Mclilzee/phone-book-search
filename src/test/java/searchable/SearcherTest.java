@@ -42,11 +42,11 @@ class SearcherTest {
 
     @Test
     void getProperMessageWithCorrectTotal() {
-        Duration start = Duration.ofSeconds(60);
-        Duration end = Duration.ofSeconds(300);
+        Duration start = Duration.ofMillis(20145);
+        Duration end = Duration.ofMillis(100395);
 
-        String message = searcher.getFormattedMessage(start, end, 250);
-        String expected = "Found 250 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        String message = searcher.getDurationString(start, end);
+        String expected = "1 min. 20 sec. 250 ms.";
         assertEquals(expected, message);
     }
 
@@ -55,50 +55,29 @@ class SearcherTest {
         Duration start = Duration.ofSeconds(60);
         Duration end = Duration.ofSeconds(300);
 
-        String message = searcher.getFormattedMessage(start, end, 2);
-        String expected = "Found 2 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        String message = searcher.getDurationString(start, end);
+        String expected = "4 min. 0 sec. 0 ms.";
         assertEquals(expected, message);
     }
 
     @Test
     void getProperMessageWithSeconds() {
-        Duration start = Duration.ofSeconds(60);
-        Duration end = Duration.ofSeconds(320);
+        Duration start = Duration.ofSeconds(20);
+        Duration end = Duration.ofSeconds(40);
 
-        String message = searcher.getFormattedMessage(start, end, 1);
-        String expected = "Found 1 / 2 entries. Time taken: 4 min. 20 sec. 0 ms.";
+        String message = searcher.getDurationString(start, end);
+        String expected = "0 min. 20 sec. 0 ms.";
         assertEquals(expected, message);
     }
 
     @Test
-    void getProperMessageWithMillis() {
-        Duration start = Duration.ofSeconds(60);
-        Duration end = Duration.ofMillis(320020);
+    void getProperDurationStringWithMillis() {
+        Duration start = Duration.ofMillis(200);
+        Duration end = Duration.ofMillis(400);
 
-        String message = searcher.getFormattedMessage(start, end, 400);
-        String expected = "Found 400 / 2 entries. Time taken: 4 min. 20 sec. 20 ms.";
+        String message = searcher.getDurationString(start, end);
+        String expected = "0 min. 0 sec. 200 ms.";
         assertEquals(expected, message);
-    }
-
-    @Test
-    void searchFunctionReturnsProperMessage() {
-        Searcher someSearcher = new Searcher(toFind, searchableFile) {
-            @Override
-            protected int foundSubArrayElements() {
-                return 2;
-            }
-
-            @Override
-            protected boolean isElementInSearchableFile(Record element) {
-                return false;
-            }
-
-            @Override
-            String getSearchingMessage() {
-                return null;
-            }
-        };
-        assertTrue(someSearcher.search().matches("Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
     }
 
     @Test

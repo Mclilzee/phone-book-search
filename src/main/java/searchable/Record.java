@@ -2,24 +2,24 @@ package searchable;
 
 import java.util.Objects;
 
-public class Record implements Comparable<Record> {
+class Record implements Comparable<Record> {
     private final String phoneNumber;
     private final String name;
 
-    public Record(String phoneNumber, String name) {
+    Record(String phoneNumber, String name) {
         this.phoneNumber = phoneNumber;
         this.name = name;
     }
 
-    public Record(String name) {
+    Record(String name) {
         this("", name);
     }
 
-    public String getNumber() {
+    String getNumber() {
         return this.phoneNumber;
     }
 
-    public String getName() {
+    String getName() {
         return this.name;
     }
 

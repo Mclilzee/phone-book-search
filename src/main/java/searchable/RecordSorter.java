@@ -1,8 +1,8 @@
 package searchable;
 
-public class RecordSorter {
+class RecordSorter {
 
-    public static void bubbleSort(Record[] array) {
+    static void bubbleSort(Record[] array) {
         boolean quit = false;
         while (!quit) {
             quit = true;
