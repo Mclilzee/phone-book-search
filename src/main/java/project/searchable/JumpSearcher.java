@@ -5,9 +5,11 @@ import java.time.Duration;
 public class JumpSearcher extends Searcher {
 
     private boolean sortInterrupted = false;
+    private final Duration sortingLimit;
 
     public JumpSearcher(Record[] searchableRecords, Record[] toFind, Duration maxSortLimit) {
         super(searchableRecords, toFind);
+        this.sortingLimit = maxSortLimit;
     }
 
     @Override
@@ -31,18 +33,20 @@ public class JumpSearcher extends Searcher {
 
     String searchingMessage(Searcher searcher) {
         StringBuilder builder = new StringBuilder("Start searching (bubble sort + jump search)...\n");
-        builder.append(searcher.getFoundMessage());
+        builder.append(searcher.getFoundMessage()).append("\n");
+        builder.append("Sorting time: ").append(getDurationString(sortingDuration));
         if (searcher instanceof LinearSearcher) {
             builder.append(" - STOPPED, moved to linear search");
         }
+        builder.append("\nSearching time: ").append(getDurationString(searchDuration));
 
-        return "";
+        return builder.toString();
     }
 
     private void bubbleSortData() {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         try {
-            RecordSorter.bubbleSort(super.searchableRecords, getSearchDuration().multipliedBy(10));
+            RecordSorter.bubbleSort(super.searchableRecords, this.sortingLimit.multipliedBy(10));
         } catch (RuntimeException e) {
             sortInterrupted = true;
         } finally {
