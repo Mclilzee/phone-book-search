@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import project.RecordReader;
+import project.ContactReader;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -21,10 +21,10 @@ class SearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableContacts = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt"))
+        searchableContacts = Arrays.stream(ContactReader.readFileToContactArray("./src/test/java/project/sampleSearchableFile.txt"))
                 .sorted()
                 .toArray(Contact[]::new);
-        toFind = Arrays.stream(RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt"))
+        toFind = Arrays.stream(ContactReader.readFileToContactArray("./src/test/java/project/sampleToFind.txt"))
                 .sorted()
                 .toArray(Contact[]::new);
     }

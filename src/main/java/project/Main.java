@@ -5,8 +5,8 @@ import project.searchable.LinearSearcher;
 import project.searchable.Contact;
 
 public class Main {
-    private static final Contact[] SEARCHABLE_CONTACTS = RecordReader.readFileToRecordArray("./phonebook.txt");
-    private static final Contact[] TO_FIND = RecordReader.readFileToRecordArray("./find.txt");
+    private static final Contact[] SEARCHABLE_CONTACTS = ContactReader.readFileToContactArray("./phonebook.txt");
+    private static final Contact[] TO_FIND = ContactReader.readFileToContactArray("./find.txt");
 
     public static void main(String[] args) {
         LinearSearcher linearSearcher = new LinearSearcher(SEARCHABLE_CONTACTS, TO_FIND);

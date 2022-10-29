@@ -9,12 +9,12 @@ import java.util.Arrays;
 
 import static java.util.stream.Collectors.joining;
 
-public class RecordReader {
+public class ContactReader {
 
-    public static Contact[] readFileToRecordArray(String filePath) {
+    public static Contact[] readFileToContactArray(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             return reader.lines()
-                    .map(RecordReader::getRecordFromString)
+                    .map(ContactReader::getContactFromString)
                     .toArray(Contact[]::new);
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -23,7 +23,7 @@ public class RecordReader {
         return new Contact[0];
     }
 
-    private static Contact getRecordFromString(String string) {
+    private static Contact getContactFromString(String string) {
         String[] values = string.split(" ");
         if (values[0].matches("\\d+")) {
             return new Contact(values[0], extractName(1, values));

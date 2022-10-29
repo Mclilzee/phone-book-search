@@ -20,14 +20,14 @@ class ContactTest {
     }
 
     @Test
-    void recordCreatedWithOneParameters() {
+    void contactCreatedWithOneParameters() {
         contact = new Contact("John Doe");
         assertEquals("John Doe", contact.getName());
         assertEquals("", contact.getNumber());
     }
 
     @Test
-    void recordsAreEqualIfTheyHaveSameFullName() {
+    void contactsAreEqualIfTheyHaveSameFullName() {
         Contact contact2 = new Contact("John Doe");
         assertEquals(contact, contact2);
     }

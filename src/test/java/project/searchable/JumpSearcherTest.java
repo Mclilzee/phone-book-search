@@ -2,7 +2,7 @@ package project.searchable;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import project.RecordReader;
+import project.ContactReader;
 
 import java.time.Duration;
 
@@ -15,8 +15,8 @@ class JumpSearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableContacts = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
-        toFind = RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt");
+        searchableContacts = ContactReader.readFileToContactArray("./src/test/java/project/sampleSearchableFile.txt");
+        toFind = ContactReader.readFileToContactArray("./src/test/java/project/sampleToFind.txt");
     }
 
     JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, Duration.ofDays(1));

@@ -2,7 +2,7 @@ package project.searchable;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import project.RecordReader;
+import project.ContactReader;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,8 +13,8 @@ class LinearSearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableContacts = RecordReader.readFileToRecordArray("./src/test/java/project/sampleSearchableFile.txt");
-        toFind = RecordReader.readFileToRecordArray("./src/test/java/project/sampleToFind.txt");
+        searchableContacts = ContactReader.readFileToContactArray("./src/test/java/project/sampleSearchableFile.txt");
+        toFind = ContactReader.readFileToContactArray("./src/test/java/project/sampleToFind.txt");
     }
 
     private final LinearSearcher searcher = new LinearSearcher(searchableContacts, toFind);
