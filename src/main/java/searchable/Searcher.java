@@ -28,7 +28,7 @@ public abstract class Searcher {
 
     public String search() {
         Duration startDuration = Duration.ofMillis(System.currentTimeMillis());
-        System.out.println("Start searching...");
+        System.out.println(getSearchingMessage());
 
         int found = foundSubArrayElements();
         Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
@@ -51,6 +51,8 @@ public abstract class Searcher {
         return String.format("Found %d / %d entries. Time taken: %d min. %d sec. %d ms.",
                 found, this.toFind.length, duration.toMinutes(), duration.toSecondsPart(), duration.toMillisPart());
     }
+
+    abstract String getSearchingMessage();
 
     abstract int foundSubArrayElements();
 

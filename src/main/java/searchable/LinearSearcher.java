@@ -2,7 +2,7 @@ package searchable;
 
 import java.io.File;
 
-public class LinearSearcher extends Searcher{
+public class LinearSearcher extends Searcher {
 
     public LinearSearcher(File toFind, File searchableFile) {
         super(toFind, searchableFile);
@@ -29,5 +29,10 @@ public class LinearSearcher extends Searcher{
         }
 
         return false;
+    }
+
+    @Override
+    String getSearchingMessage() {
+        return "Start searching (linear search)...";
     }
 }

@@ -89,6 +89,11 @@ class SearcherTest {
             protected boolean isElementInSearchableFile(String element) {
                 return false;
             }
+
+            @Override
+            String getSearchingMessage() {
+                return null;
+            }
         };
         assertTrue(someSearcher.search().matches("Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
     }

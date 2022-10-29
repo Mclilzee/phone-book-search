@@ -23,4 +23,9 @@ class LinearSearcherTest {
     void countElementsOfSubArray() {
         assertEquals(2, searcher.foundSubArrayElements());
     }
+
+    @Test
+    void getSearchingMessage() {
+        assertEquals("Start searching (linear search)...", searcher.getSearchingMessage());
+    }
 }
