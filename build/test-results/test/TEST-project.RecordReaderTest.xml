@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.RecordReaderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-29T13:20:21" hostname="DESKTOP-DM0E31D" time="0.005">
+<testsuite name="project.RecordReaderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-29T13:32:05" hostname="DESKTOP-DM0E31D" time="0.021">
   <properties/>
-  <testcase name="readFileToRecordArray()" classname="project.RecordReaderTest" time="0.002"/>
+  <testcase name="readFileToRecordArray()" classname="project.RecordReaderTest" time="0.018"/>
   <testcase name="returnEmptyArrayIfFileNotFound()" classname="project.RecordReaderTest" time="0.003"/>
   <system-out><![CDATA[imaginaryfile (The system cannot find the file specified)
 ]]></system-out>

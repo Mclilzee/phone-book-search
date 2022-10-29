@@ -56,14 +56,16 @@ class SearcherTest {
                 return true;
             }
         };
-        assertEquals(2, specificSearcher.numberOfElementsFound());
+
+        searcher.findElements();
+        assertEquals(2, specificSearcher.getFound());
     }
 
     @Test
     void getProperMessageWithCorrectFound() {
         searcher.searchDuration = Duration.ofSeconds(240);
-        String message = searcher.getFoundMessage(250);
-        String expected = "Found 250 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        String message = searcher.getFoundMessage();
+        String expected = "Found 2 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
         assertEquals(expected, message);
     }
 

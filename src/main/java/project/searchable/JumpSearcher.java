@@ -5,7 +5,7 @@ import java.time.Duration;
 public class JumpSearcher extends Searcher {
 
     private Duration sortingDuration = Duration.ZERO;
-    private boolean sortStopped = false;
+    private boolean sortInterrupted = false;
 
     public JumpSearcher(Record[] searchableRecords, Record[] toFind, Duration maxSortLimit) {
         super(searchableRecords, toFind);
@@ -15,16 +15,30 @@ public class JumpSearcher extends Searcher {
         this.sortingDuration = end.minus(start);
     }
 
+    public Duration getSortingDuration() {
+        return this.sortingDuration;
+    }
+
     @Override
     String search() {
         bubbleSortData();
-        Duration sortingStart = Duration.ofMillis(System.currentTimeMillis());
-        Duration sortingEnd = Duration.ofMillis(System.currentTimeMillis());
+        String message;
+        if (!sortInterrupted) {
+            Duration searchingStart = Duration.ofMillis(System.currentTimeMillis());
+            super.findElements();
+            Duration searchingEnd = Duration.ofMillis(System.currentTimeMillis());
+            setSearchDuration(searchingStart, searchingEnd);
+        } else {
+            LinearSearcher searcher = new LinearSearcher(searchableRecords, toFind);
+            searcher.findElements();
+        }
 
-        Duration searchingStart = Duration.ofMillis(System.currentTimeMillis());
-        int found = super.numberOfElementsFound();
-        Duration searchingEnd = Duration.ofMillis(System.currentTimeMillis());
+        return "";
+    }
 
+    String searchingMessage(Searcher searcher) {
+        StringBuilder builder = new StringBuilder("Start searching (bubble sort + jump search)...\n");
+        builder.append(searcher.getFoundMessage()).append("\n");
         return "";
     }
 
@@ -33,7 +47,7 @@ public class JumpSearcher extends Searcher {
         try {
             RecordSorter.bubbleSort(super.searchableRecords, getSearchDuration().multipliedBy(10));
         } catch (RuntimeException e) {
-            sortStopped = true;
+            sortInterrupted = true;
         } finally {
             Duration end = Duration.ofMillis(System.currentTimeMillis());
             setSortingDuration(start, end);
@@ -65,9 +79,5 @@ public class JumpSearcher extends Searcher {
         }
 
         return element.equals(super.searchableRecords[current]);
-    }
-
-    public Duration getSortingDuration() {
-        return this.sortingDuration;
     }
 }

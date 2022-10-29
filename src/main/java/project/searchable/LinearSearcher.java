@@ -11,11 +11,11 @@ public class LinearSearcher extends Searcher {
     @Override
     public String search() {
         Duration startDuration = Duration.ofMillis(System.currentTimeMillis());
-        int found = numberOfElementsFound();
+        findElements();
         Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
 
         super.setSearchDuration(startDuration, endDuration);
-        return String.format("Start searching (linear search)...\n%s", getFoundMessage(found));
+        return String.format("Start searching (linear search)...\n%s", getFoundMessage());
     }
 
     @Override
