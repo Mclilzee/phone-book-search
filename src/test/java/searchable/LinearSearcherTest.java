@@ -14,19 +14,7 @@ class LinearSearcherTest {
     private final LinearSearcher searcher = new LinearSearcher(toFind, searchableFile);
 
     @Test
-    void checkIfElementIsInArray() {
-        assertTrue(searcher.isElementInSearchableFile(new Record("123421", "John Doe")));
-        assertFalse(searcher.isElementInSearchableFile(new Record("Marksmoon Walker")));
-    }
-
-    @Test
-    void countElementsOfSubArray() {
-        assertEquals(2, searcher.numberOfElementsFound());
-    }
-
-    @Test
     void searchFunctionReturnCorrectString() {
-        String result = searcher.search();
         assertTrue(searcher.search().matches("Start searching \\(linear search\\)\\.{3}\\n" +
                 "Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
     }

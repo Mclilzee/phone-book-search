@@ -1,17 +1,21 @@
 package searchable;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class SearcherTest {
 
-    private final File toFind = new File("./src/test/java/searchable/sampleToFind.txt");
-    private final File searchableFile = new File("./src/test/java/searchable/sampleSearchableFile.txt");
+    private static final File toFind = new File("./src/test/java/searchable/sampleToFind.txt");
+    private static final File searchableFile = new File("./src/test/java/searchable/sampleSearchableFile.txt");
 
     Searcher searcher = mock(Searcher.class, withSettings().useConstructor(toFind, searchableFile)
             .defaultAnswer(CALLS_REAL_METHODS));
@@ -35,7 +39,7 @@ class SearcherTest {
         Duration start = Duration.ofSeconds(60);
         Duration end = Duration.ofSeconds(300);
 
-        String message = searcher.getFormattedMessage(start, end, 250);
+        String message = searcher.getFoundMessage(start, end, 250);
         String expected = "Found 250 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
         assertEquals(expected, message);
     }
@@ -87,5 +91,26 @@ class SearcherTest {
         Record actual2 = searcher.getRecordFromString("123534 John Doe");
         assertEquals(expected, actual);
         assertEquals(expected, actual2);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideSearcher")
+    void checkIfElementIsInArray(Searcher specificSearcher) {
+        assertTrue(specificSearcher.isElementInSearchableFile(new Record("123421", "John Doe")));
+        assertTrue(specificSearcher.isElementInSearchableFile(new Record("123421", "Dongos With Long Name")));
+        assertFalse(specificSearcher.isElementInSearchableFile(new Record("Marksmoon Walker")));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideSearcher")
+    void countElementsOfSubArray(Searcher specificSearcher) {
+        assertEquals(2, specificSearcher.numberOfElementsFound());
+    }
+
+    private static Stream<Arguments> provideSearcher() {
+        return Stream.of(
+                Arguments.of(new LinearSearcher(toFind, searchableFile)),
+                Arguments.of(new JumpSearcher(toFind, searchableFile))
+        );
     }
 }

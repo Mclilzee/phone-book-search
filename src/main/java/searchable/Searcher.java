@@ -45,7 +45,7 @@ abstract class Searcher {
                 .collect(Collectors.joining(" "));
     }
 
-    String getFormattedMessage(Duration start, Duration end, int found) {
+    String getFoundMessage(Duration start, Duration end, int found) {
         String durationString = getDurationString(start, end);
 
         return String.format("Found %d / %d entries. Time taken: %s",

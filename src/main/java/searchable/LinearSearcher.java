@@ -15,7 +15,7 @@ public class LinearSearcher extends Searcher {
         int found = numberOfElementsFound();
         Duration endDuration = Duration.ofMillis(System.currentTimeMillis());
 
-        return String.format("Start searching (linear search)...\n%s", getFormattedMessage(startDuration, endDuration, found));
+        return String.format("Start searching (linear search)...\n%s", getFoundMessage(startDuration, endDuration, found));
     }
 
     @Override
