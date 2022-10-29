@@ -6,7 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 abstract class Searcher {
 
@@ -42,7 +43,13 @@ abstract class Searcher {
     private String extractName(int skip, String[] string) {
         return Arrays.stream(string)
                 .skip(skip)
-                .collect(Collectors.joining(" "));
+                .collect(joining(" "));
+    }
+
+    int numberOfElementsFound() {
+        return Arrays.stream(toFind)
+                .filter(this::isElementInSearchableFile)
+                .collect(collectingAndThen(counting(), Long::intValue));
     }
 
     String getFoundMessage(Duration start, Duration end, int found) {
@@ -60,6 +67,4 @@ abstract class Searcher {
     abstract String search();
 
     abstract boolean isElementInSearchableFile(Record element);
-
-    abstract int numberOfElementsFound();
 }

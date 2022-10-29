@@ -1,5 +1,6 @@
 package searchable;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -32,6 +33,22 @@ class SearcherTest {
     @Test
     void getEmptyArrayIfFileDoesNotExit() {
         assertArrayEquals(new String[0], searcher.readFileToRecordArray(new File("imaginaryFile")));
+    }
+
+    @Test
+    void numberOfElementsFound() {
+        Searcher specificSearcher = new Searcher(toFind, searchableFile) {
+            @Override
+            String search() {
+                return null;
+            }
+
+            @Override
+            boolean isElementInSearchableFile(Record element) {
+                return true;
+            }
+        };
+        assertEquals(2, specificSearcher.numberOfElementsFound());
     }
 
     @Test
@@ -99,12 +116,6 @@ class SearcherTest {
         assertTrue(specificSearcher.isElementInSearchableFile(new Record("123421", "John Doe")));
         assertTrue(specificSearcher.isElementInSearchableFile(new Record("123421", "Dongos With Long Name")));
         assertFalse(specificSearcher.isElementInSearchableFile(new Record("Marksmoon Walker")));
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideSearcher")
-    void countElementsOfSubArray(Searcher specificSearcher) {
-        assertEquals(2, specificSearcher.numberOfElementsFound());
     }
 
     private static Stream<Arguments> provideSearcher() {

@@ -19,18 +19,6 @@ public class LinearSearcher extends Searcher {
     }
 
     @Override
-    int numberOfElementsFound() {
-        int count = 0;
-        for (Record element : super.toFind) {
-            if (isElementInSearchableFile(element)) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
-    @Override
     boolean isElementInSearchableFile(Record element) {
         for (Record record : super.searchableFile) {
             if (record.equals(element)) {

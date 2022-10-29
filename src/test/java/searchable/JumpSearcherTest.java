@@ -16,12 +16,4 @@ class JumpSearcherTest {
     @Test
     void search() {
     }
-
-    @Test
-    void isElementInSearchableFile() {
-    }
-
-    @Test
-    void numberOfElementsFound() {
-    }
 }
