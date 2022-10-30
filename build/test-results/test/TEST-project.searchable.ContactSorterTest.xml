@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.searchable.ContactSorterTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-30T09:25:04" hostname="DESKTOP-DM0E31D" time="0.005">
-  <properties/>
-  <testcase name="bubbleSort()" classname="project.searchable.ContactSorterTest" time="0.001"/>
-  <testcase name="setMaxLimitCorrectly()" classname="project.searchable.ContactSorterTest" time="0.002"/>
-  <testcase name="bubbleSorterThrowErrorWhenExceedsTime()" classname="project.searchable.ContactSorterTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="project.ContactReaderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-10-30T09:25:04" hostname="DESKTOP-DM0E31D" time="0.028">
-  <properties/>
-  <testcase name="returnEmptyArrayIfFileNotFound()" classname="project.ContactReaderTest" time="0.02"/>
-  <testcase name="readFileToContactArray()" classname="project.ContactReaderTest" time="0.007"/>
-  <system-out><![CDATA[imaginaryfile (The system cannot find the file specified)
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
