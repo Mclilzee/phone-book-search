@@ -47,21 +47,21 @@ class ContactSorterTest {
     void getSorted() throws InterruptedException {
         assertArrayEquals(sorter.getSorted(contacts), expected);
     }
-}
 
-class SorterTest<T extends Comparable<T>> extends ContactSorter<T> {
+    private static class SorterTest<T extends Comparable<T>> extends ContactSorter<T> {
 
-    public SorterTest(Duration duration) {
-        super(duration);
-    }
+        public SorterTest(Duration duration) {
+            super(duration);
+        }
 
-    @Override
-    void startSorting(T[] unsortedArray) {
-        Arrays.sort(unsortedArray);
-    }
+        @Override
+        void startSorting(T[] unsortedArray) {
+            Arrays.sort(unsortedArray);
+        }
 
-    @Override
-    public ContactSorter<T> withMaxDuration(Duration maxDuration) {
-        return new SorterTest<>(maxDuration);
+        @Override
+        public ContactSorter<T> withMaxDuration(Duration maxDuration) {
+            return new SorterTest<>(maxDuration);
+        }
     }
 }

@@ -2,7 +2,6 @@ package project.searchable;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.TimerTask;
 
 public abstract class ContactSorter<T extends Comparable<T>> {
     private final Duration maxDuration;

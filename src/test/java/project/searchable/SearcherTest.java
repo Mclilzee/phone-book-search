@@ -126,21 +126,21 @@ class SearcherTest {
                 Arguments.of(new JumpSearcher(searchableContacts, toFind))
         );
     }
+
+    private static class TestSearcher extends Searcher {
+
+        TestSearcher(Contact[] searchableContacts, Contact[] toFind) {
+            super(searchableContacts, toFind);
+        }
+
+        @Override
+        public String search() {
+            return null;
+        }
+
+        @Override
+        boolean isElementInSearchableFile(Contact element) {
+            return true;
+        }
+    }
 }
-
-class TestSearcher extends Searcher {
-
-    TestSearcher(Contact[] searchableContacts, Contact[] toFind) {
-        super(searchableContacts, toFind);
-    }
-
-    @Override
-    public String search() {
-        return null;
-    }
-
-    @Override
-    boolean isElementInSearchableFile(Contact element) {
-        return true;
-    }
-};
