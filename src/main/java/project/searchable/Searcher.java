@@ -50,8 +50,8 @@ abstract class Searcher {
         setSearchDuration(start, end);
     }
 
-    String getFoundMessage() {
-        String durationString = getDurationString(searchDuration.plus(sorter.getCurrentDuration()));
+    String getFoundMessage(Duration sortingDuration) {
+        String durationString = getDurationString(searchDuration.plus(sortingDuration));
 
         return String.format("Found %d / %d entries. Time taken: %s",
                 this.found, this.toFind.length, durationString);

@@ -35,8 +35,7 @@ class SearcherTest {
         };
     }
 
-    Searcher searcher = mock(Searcher.class, withSettings().useConstructor(searchableContacts, toFind)
-            .defaultAnswer(CALLS_REAL_METHODS));
+    TestSearcher searcher = new TestSearcher(searchableContacts, toFind);
 
     @Test
     void searchDuration() {
@@ -51,40 +50,25 @@ class SearcherTest {
 
     @Test
     void findElements() {
-        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
-            @Override
-            public String search() {
-                return null;
-            }
-
-            @Override
-            boolean isElementInSearchableFile(Contact element) {
-                return true;
-            }
-        };
-
-        specificSearcher.findElements();
-        assertEquals(2, specificSearcher.getFound());
+        searcher.findElements();
+        assertEquals(2, searcher.getFound());
     }
 
     @Test
     void getProperMessageWithCorrectFound() {
-        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
-            @Override
-            public String search() {
-                return null;
-            }
-
-            @Override
-            boolean isElementInSearchableFile(Contact element) {
-                return true;
-            }
-        };
-
-        specificSearcher.findElements();
-        specificSearcher.searchDuration = Duration.ofSeconds(240);
-        String message = specificSearcher.getFoundMessage();
+        searcher.findElements();
+        searcher.searchDuration = Duration.ofSeconds(240);
+        String message = searcher.getFoundMessage(Duration.ZERO);
         String expected = "Found 2 / 2 entries. Time taken: 4 min. 0 sec. 0 ms.";
+        assertEquals(expected, message);
+    }
+
+    @Test
+    void getProperMessageWithCorrectSortingTime() {
+        searcher.findElements();
+        searcher.searchDuration = Duration.ofSeconds(240);
+        String message = searcher.getFoundMessage(Duration.ofSeconds(1));
+        String expected = "Found 2 / 2 entries. Time taken: 4 min. 1 sec. 0 ms.";
         assertEquals(expected, message);
     }
 
@@ -143,3 +127,20 @@ class SearcherTest {
         );
     }
 }
+
+class TestSearcher extends Searcher {
+
+    TestSearcher(Contact[] searchableContacts, Contact[] toFind) {
+        super(searchableContacts, toFind);
+    }
+
+    @Override
+    public String search() {
+        return null;
+    }
+
+    @Override
+    boolean isElementInSearchableFile(Contact element) {
+        return true;
+    }
+};

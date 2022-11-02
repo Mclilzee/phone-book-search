@@ -11,7 +11,7 @@ public class LinearSearcher extends Searcher {
     @Override
     public String search() {
         findElements();
-        return String.format("Start searching (linear search)...\n%s", getFoundMessage());
+        return String.format("Start searching (linear search)...\n%s", getFoundMessage(Duration.ZERO));
     }
 
     @Override

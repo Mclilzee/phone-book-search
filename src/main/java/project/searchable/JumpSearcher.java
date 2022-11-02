@@ -30,7 +30,7 @@ public class JumpSearcher extends Searcher {
 
     String searchingMessage(Searcher searcher) {
         StringBuilder builder = new StringBuilder("Start searching (bubble sort + jump search)...\n");
-        builder.append(searcher.getFoundMessage()).append("\n");
+        builder.append(searcher.getFoundMessage(sorter.currentDuration)).append("\n");
         builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
         if (searcher instanceof LinearSearcher) {
             builder.append(" - STOPPED, moved to linear search");

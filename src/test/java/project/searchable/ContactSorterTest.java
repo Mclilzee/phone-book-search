@@ -57,12 +57,15 @@ class SorterTest<T extends Comparable<T>> extends ContactSorter<T> {
 
     @Override
     public T[] getSorted(T[] unsortedArray) {
+        if (getMaxDuration().compareTo(Duration.ZERO) <= 0) {
+            throw new RuntimeException();
+        }
         Arrays.sort(unsortedArray);
         return unsortedArray;
     }
 
     @Override
     public ContactSorter<T> withMaxDuration(Duration maxDuration) {
-        return new SorterTest<T>(maxDuration);
+        return new SorterTest<>(maxDuration);
     }
 }
