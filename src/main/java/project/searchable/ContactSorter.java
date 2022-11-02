@@ -1,6 +1,7 @@
 package project.searchable;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 public abstract class ContactSorter<T extends Comparable<T>> {
     private final Duration maxDuration;
@@ -10,9 +11,35 @@ public abstract class ContactSorter<T extends Comparable<T>> {
         this.maxDuration = duration;
     }
 
-    public abstract T[] getSorted(T[] unsortedArray);
+    abstract void startSorting(T[] unsortedArray);
 
     public abstract ContactSorter<T> withMaxDuration(Duration maxDuration);
+
+    public T[] getSorted(T[] unsortedArray) throws InterruptedException {
+        T[] copyArray = Arrays.copyOf(unsortedArray, unsortedArray.length);
+
+        Duration start = Duration.ofMillis(System.currentTimeMillis());
+        Thread sortingThread = getTimedThread(copyArray);
+        sortingThread.start();
+
+        while (sortingThread.isAlive()) {
+            if (Duration.ofMillis(System.currentTimeMillis()).minus(start).compareTo(maxDuration) >= 0) {
+                sortingThread.interrupt();
+                setCurrentDurationToMax();
+                throw new InterruptedException();
+            }
+        }
+
+        setCurrentDuration(start, Duration.ofMillis(System.currentTimeMillis()));
+        return copyArray;
+    }
+
+    private Thread getTimedThread(T[] unsortedArray) {
+
+        return new Thread(() -> {
+            startSorting(unsortedArray);
+        });
+    }
 
     Duration getMaxDuration() {
         return maxDuration;
@@ -27,6 +54,6 @@ public abstract class ContactSorter<T extends Comparable<T>> {
     }
 
     void setCurrentDurationToMax() {
-        this.currentDuration = maxDuration;
+        this.currentDuration = maxDuration.isNegative() ? Duration.ZERO : maxDuration;
     }
 }

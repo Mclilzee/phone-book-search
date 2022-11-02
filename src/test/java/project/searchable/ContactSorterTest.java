@@ -34,7 +34,7 @@ class ContactSorterTest {
     @Test
     void sorterThrowErrorWhenExceedsTime() {
         sorter = sorter.withMaxDuration(Duration.ofSeconds(-1));
-        assertThrows(RuntimeException.class, () -> sorter.getSorted(contacts));
+        assertThrows(InterruptedException.class, () -> sorter.getSorted(contacts));
     }
 
     @Test
@@ -44,7 +44,7 @@ class ContactSorterTest {
     }
 
     @Test
-    void getSorted() {
+    void getSorted() throws InterruptedException {
         assertArrayEquals(sorter.getSorted(contacts), expected);
     }
 }
@@ -56,13 +56,12 @@ class SorterTest<T extends Comparable<T>> extends ContactSorter<T> {
     }
 
     @Override
-    T[] startSorting(T[] unsortedArray) {
+    void startSorting(T[] unsortedArray) {
         Arrays.sort(unsortedArray);
-        return unsortedArray;
     }
 
     @Override
     public ContactSorter<T> withMaxDuration(Duration maxDuration) {
-        return new SorterTest<T>(maxDuration);
+        return new SorterTest<>(maxDuration);
     }
 }

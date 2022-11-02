@@ -43,7 +43,7 @@ public class JumpSearcher extends Searcher {
     private void bubbleSortData() {
         try {
             this.searchableContacts = sorter.getSorted(this.searchableContacts);
-        } catch (RuntimeException e) {
+        } catch (InterruptedException e) {
             sortInterrupted = true;
         }
     }
