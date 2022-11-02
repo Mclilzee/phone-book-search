@@ -2,6 +2,7 @@ package project.searchable;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.TimerTask;
 
 public abstract class ContactSorter<T extends Comparable<T>> {
     private final Duration maxDuration;
@@ -19,7 +20,7 @@ public abstract class ContactSorter<T extends Comparable<T>> {
         T[] copyArray = Arrays.copyOf(unsortedArray, unsortedArray.length);
 
         Duration start = Duration.ofMillis(System.currentTimeMillis());
-        Thread sortingThread = getTimedThread(copyArray);
+        Thread sortingThread = new Thread(() -> startSorting(copyArray));
         sortingThread.start();
 
         while (sortingThread.isAlive()) {
@@ -32,13 +33,6 @@ public abstract class ContactSorter<T extends Comparable<T>> {
 
         setCurrentDuration(start, Duration.ofMillis(System.currentTimeMillis()));
         return copyArray;
-    }
-
-    private Thread getTimedThread(T[] unsortedArray) {
-
-        return new Thread(() -> {
-            startSorting(unsortedArray);
-        });
     }
 
     Duration getMaxDuration() {
