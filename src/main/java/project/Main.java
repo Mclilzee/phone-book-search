@@ -1,9 +1,6 @@
 package project;
 
-import project.searchable.ContactSorter;
-import project.searchable.JumpSearcher;
-import project.searchable.LinearSearcher;
-import project.searchable.Contact;
+import project.searchable.*;
 
 public class Main {
     private static final Contact[] SEARCHABLE_CONTACTS = ContactReader.readFileToContactArray("./phonebook.txt");
@@ -14,8 +11,8 @@ public class Main {
         System.out.println(linearSearcher.search());
         System.out.println();
 
-        ContactSorter.setMaxDuration(linearSearcher.getSearchDuration().multipliedBy(10));
-        JumpSearcher jumpSearcher = new JumpSearcher(SEARCHABLE_CONTACTS, TO_FIND);
+        ContactSorter<Contact> bubbleSorter = new BubbleSorter<>(linearSearcher.getSearchDuration().multipliedBy(10));
+        JumpSearcher jumpSearcher = new JumpSearcher(SEARCHABLE_CONTACTS, TO_FIND, bubbleSorter);
         System.out.println(jumpSearcher.search());
     }
 }

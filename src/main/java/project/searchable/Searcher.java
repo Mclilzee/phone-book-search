@@ -8,15 +8,16 @@ import static java.util.stream.Collectors.counting;
 
 abstract class Searcher {
 
-    final Contact[] searchableContacts;
+    Contact[] searchableContacts;
     final Contact[] toFind;
+    final ContactSorter<Contact> sorter;
     Duration searchDuration = Duration.ZERO;
-    Duration sortingDuration = Duration.ZERO;
     private int found = 0;
 
-    Searcher(Contact[] searchableContacts, Contact[] toFind) {
+    Searcher(Contact[] searchableContacts, Contact[] toFind, ContactSorter<Contact> sorter) {
         this.searchableContacts = searchableContacts;
         this.toFind = toFind;
+        this.sorter = sorter;
     }
 
     public Duration getSearchDuration() {
@@ -28,15 +29,7 @@ abstract class Searcher {
     }
 
     public Duration getSortingDuration() {
-        return this.sortingDuration;
-    }
-
-    void setSortingDuration(Duration start, Duration end) {
-        setSortingDuration(end.minus(start));
-    }
-
-    void setSortingDuration(Duration duration) {
-        this.sortingDuration = duration;
+        return this.sorter.currentDuration;
     }
 
     int getFound() {
@@ -53,7 +46,7 @@ abstract class Searcher {
     }
 
     String getFoundMessage() {
-        String durationString = getDurationString(searchDuration.plus(sortingDuration));
+        String durationString = getDurationString(searchDuration.plus(sorter.getCurrentDuration()));
 
         return String.format("Found %d / %d entries. Time taken: %s",
                 this.found, this.toFind.length, durationString);

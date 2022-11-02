@@ -6,8 +6,8 @@ public class JumpSearcher extends Searcher {
 
     private boolean sortInterrupted = false;
 
-    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind) {
-        super(searchableContacts, toFind);
+    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, ContactSorter<Contact> sorter) {
+        super(searchableContacts, toFind, sorter);
     }
 
     @Override
@@ -20,7 +20,6 @@ public class JumpSearcher extends Searcher {
         } else {
             LinearSearcher searcher = new LinearSearcher(searchableContacts, toFind);
             searcher.findElements();
-            searcher.setSortingDuration(this.sortingDuration);
             message = searchingMessage(searcher);
         }
 
@@ -30,7 +29,7 @@ public class JumpSearcher extends Searcher {
     String searchingMessage(Searcher searcher) {
         StringBuilder builder = new StringBuilder("Start searching (bubble sort + jump search)...\n");
         builder.append(searcher.getFoundMessage()).append("\n");
-        builder.append("Sorting time: ").append(getDurationString(sortingDuration));
+        builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
         if (searcher instanceof LinearSearcher) {
             builder.append(" - STOPPED, moved to linear search");
         }
@@ -42,12 +41,12 @@ public class JumpSearcher extends Searcher {
     private void bubbleSortData() {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         try {
-            ContactSorter.bubbleSort(this.searchableContacts);
+           this.searchableContacts = sorter.getSorted(this.searchableContacts);
         } catch (RuntimeException e) {
             sortInterrupted = true;
         } finally {
             Duration end = Duration.ofMillis(System.currentTimeMillis());
-            setSortingDuration(start, end);
+            sorter.setCurrentDuration(start, end);
         }
     }
 

@@ -5,10 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import project.ContactReader;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,12 +19,20 @@ class SearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableContacts = Arrays.stream(ContactReader.readFileToContactArray("./src/test/java/project/sampleSearchableFile.txt"))
-                .sorted()
-                .toArray(Contact[]::new);
-        toFind = Arrays.stream(ContactReader.readFileToContactArray("./src/test/java/project/sampleToFind.txt"))
-                .sorted()
-                .toArray(Contact[]::new);
+        searchableContacts = new Contact[]{
+                new Contact("Mark zergberg"),
+                new Contact("John Doe"),
+                new Contact("Gly marksman"),
+                new Contact("Emad doblos"),
+                new Contact("Dengos sheklos"),
+                new Contact("Geralt rivea"),
+                new Contact("2342351", "Dongos With Long Name")
+        };
+
+        toFind = new Contact[]{
+                new Contact("Gly marksman"),
+                new Contact("Emad doblos")
+        };
     }
 
     Searcher searcher = mock(Searcher.class, withSettings().useConstructor(searchableContacts, toFind)
@@ -44,18 +50,8 @@ class SearcherTest {
     }
 
     @Test
-    void sortingDuration() {
-        assertEquals(Duration.ZERO, searcher.getSortingDuration());
-
-        Duration start = Duration.ofSeconds(200);
-        Duration end = Duration.ofSeconds(350);
-        searcher.setSortingDuration(start, end);
-        assertEquals(Duration.ofSeconds(150), searcher.getSortingDuration());
-    }
-
-    @Test
     void findElements() {
-        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
+        Searcher specificSearcher = new Searcher(searchableContacts, toFind, null) {
             @Override
             public String search() {
                 return null;
@@ -73,7 +69,7 @@ class SearcherTest {
 
     @Test
     void getProperMessageWithCorrectFound() {
-        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
+        Searcher specificSearcher = new Searcher(searchableContacts, toFind, null) {
             @Override
             public String search() {
                 return null;
@@ -143,7 +139,7 @@ class SearcherTest {
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
                 Arguments.of(new LinearSearcher(searchableContacts, toFind)),
-                Arguments.of(new JumpSearcher(searchableContacts, toFind))
+                Arguments.of(new JumpSearcher(searchableContacts, toFind, new BubbleSorter<>(Duration.ofDays(1))))
         );
     }
 }

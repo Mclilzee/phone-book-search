@@ -15,15 +15,26 @@ class JumpSearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableContacts = ContactReader.readFileToContactArray("./src/test/java/project/sampleSearchableFile.txt");
-        toFind = ContactReader.readFileToContactArray("./src/test/java/project/sampleToFind.txt");
+        searchableContacts = new Contact[]{
+                new Contact("Mark zergberg"),
+                new Contact("John Doe"),
+                new Contact("Gly marksman"),
+                new Contact("Emad doblos"),
+                new Contact("Dengos sheklos"),
+                new Contact("Geralt rivea"),
+                new Contact("2342351", "Dongos With Long Name")
+        };
+
+        toFind = new Contact[]{
+                new Contact("Gly marksman"),
+                new Contact("Emad doblos")
+        };
     }
 
-    JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind);
+    JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, new BubbleSorter<>(Duration.ofDays(1)));
 
     @Test
     void getProperSearchMessage() {
-        ContactSorter.setMaxDuration(Duration.ofDays(1));
         String result = searcher.search();
         assertTrue(result.matches(
                 "Start searching \\(bubble sort \\+ jump search\\)\\.{3}\n" +
@@ -35,8 +46,7 @@ class JumpSearcherTest {
 
     @Test
     void getProperMessageWhenSortIsInterrupted() {
-        ContactSorter.setMaxDuration(Duration.ofSeconds(-1));
-        JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind);
+        JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, new BubbleSorter<>(Duration.ofSeconds(-1)));
         String result = searcher.search();
         assertTrue(result.matches("Start searching \\(bubble sort \\+ jump search\\)\\.{3}\n" +
                 "Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +

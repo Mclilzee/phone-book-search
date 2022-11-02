@@ -3,7 +3,7 @@ package project.searchable;
 public class LinearSearcher extends Searcher {
 
     public LinearSearcher(Contact[] searchableContacts, Contact[] toFind) {
-        super(searchableContacts, toFind);
+        super(searchableContacts, toFind, null);
     }
 
     @Override

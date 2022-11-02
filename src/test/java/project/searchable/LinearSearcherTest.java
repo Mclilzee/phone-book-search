@@ -13,8 +13,20 @@ class LinearSearcherTest {
 
     @BeforeAll
     static void setup() {
-        searchableContacts = ContactReader.readFileToContactArray("./src/test/java/project/sampleSearchableFile.txt");
-        toFind = ContactReader.readFileToContactArray("./src/test/java/project/sampleToFind.txt");
+        searchableContacts = new Contact[]{
+                new Contact("Mark zergberg"),
+                new Contact("John Doe"),
+                new Contact("Gly marksman"),
+                new Contact("Emad doblos"),
+                new Contact("Dengos sheklos"),
+                new Contact("Geralt rivea"),
+                new Contact("2342351", "Dongos With Long Name")
+        };
+
+        toFind = new Contact[]{
+                new Contact("Gly marksman"),
+                new Contact("Emad doblos")
+        };
     }
 
     private final LinearSearcher searcher = new LinearSearcher(searchableContacts, toFind);

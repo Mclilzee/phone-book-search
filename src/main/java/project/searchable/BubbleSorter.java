@@ -11,10 +11,9 @@ public class BubbleSorter<T extends Comparable<T>> extends ContactSorter<T> {
         super(duration);
     }
 
-    public T[] getSorted(T[] array) {
-        T[] copyArray = Arrays.copyOf(array, array.length);
-
-        Duration start = Duration.ofMillis(System.currentTimeMillis());
+    @Override
+    T[] startSorting(T[] unsortedArray) {
+        T[] copyArray = Arrays.copyOf(unsortedArray, unsortedArray.length);
         boolean quit = false;
         while (!quit) {
             quit = true;
@@ -29,20 +28,12 @@ public class BubbleSorter<T extends Comparable<T>> extends ContactSorter<T> {
                     copyArray[i + 1] = previous;
                     quit = false;
                 }
-
-                if (Duration.ofMillis(System.currentTimeMillis()).minus(start).compareTo(maxDuration) > 0) {
-                    setCurrentDuration(start, maxDuration);
-                    throw new RuntimeException();
-                }
             }
         }
 
-        Duration end = Duration.ofMillis(System.currentTimeMillis());
-        setCurrentDuration(start, end);
         return copyArray;
     }
 
-    @Override
     public ContactSorter<T> withMaxDuration(Duration maxDuration) {
         return new BubbleSorter<>(maxDuration);
     }
