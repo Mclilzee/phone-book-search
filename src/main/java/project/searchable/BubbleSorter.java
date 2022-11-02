@@ -3,10 +3,13 @@ package project.searchable;
 import java.time.Duration;
 import java.util.Arrays;
 
-public class BubbleSorter implements ContactSorter {
+public class BubbleSorter<T extends Comparable<T>> extends ContactSorter {
 
     private Duration maxDuration = Duration.ZERO;
 
+    public BubbleSorter(Duration duration) {
+        super(duration);
+    }
     public Contact[] getSorted(Contact[] array) {
         Contact[] copyArray = Arrays.copyOf(array, array.length);
 
@@ -39,7 +42,7 @@ public class BubbleSorter implements ContactSorter {
         this.maxDuration = duration;
     }
 
-    public Duration getMaxDuration() {
-        return this.maxDuration;
+    public BubbleSorter withMaxDuration(Duration maxDuration) {
+        return new BubbleSorter(maxDuration);
     }
 }
