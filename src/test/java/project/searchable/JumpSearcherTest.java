@@ -2,7 +2,6 @@ package project.searchable;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import project.ContactReader;
 
 import java.time.Duration;
 

@@ -20,13 +20,13 @@ class SearcherTest {
     @BeforeAll
     static void setup() {
         searchableContacts = new Contact[]{
-                new Contact("Mark zergberg"),
-                new Contact("John Doe"),
-                new Contact("Gly marksman"),
-                new Contact("Emad doblos"),
                 new Contact("Dengos sheklos"),
+                new Contact("2342351", "Dongos With Long Name"),
+                new Contact("Emad doblos"),
                 new Contact("Geralt rivea"),
-                new Contact("2342351", "Dongos With Long Name")
+                new Contact("Gly marksman"),
+                new Contact("John Doe"),
+                new Contact("Mark zergberg")
         };
 
         toFind = new Contact[]{
@@ -51,7 +51,7 @@ class SearcherTest {
 
     @Test
     void findElements() {
-        Searcher specificSearcher = new Searcher(searchableContacts, toFind, null) {
+        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
             @Override
             public String search() {
                 return null;
@@ -69,7 +69,7 @@ class SearcherTest {
 
     @Test
     void getProperMessageWithCorrectFound() {
-        Searcher specificSearcher = new Searcher(searchableContacts, toFind, null) {
+        Searcher specificSearcher = new Searcher(searchableContacts, toFind) {
             @Override
             public String search() {
                 return null;
@@ -139,7 +139,7 @@ class SearcherTest {
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
                 Arguments.of(new LinearSearcher(searchableContacts, toFind)),
-                Arguments.of(new JumpSearcher(searchableContacts, toFind, new BubbleSorter<>(Duration.ofDays(1))))
+                Arguments.of(new JumpSearcher(searchableContacts, toFind))
         );
     }
 }

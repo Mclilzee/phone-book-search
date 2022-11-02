@@ -1,13 +1,15 @@
 package project.searchable;
 
-import java.time.Duration;
-
 public class JumpSearcher extends Searcher {
 
     private boolean sortInterrupted = false;
 
     public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, ContactSorter<Contact> sorter) {
         super(searchableContacts, toFind, sorter);
+    }
+
+    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind) {
+        super(searchableContacts, toFind);
     }
 
     @Override
@@ -39,14 +41,10 @@ public class JumpSearcher extends Searcher {
     }
 
     private void bubbleSortData() {
-        Duration start = Duration.ofMillis(System.currentTimeMillis());
         try {
-           this.searchableContacts = sorter.getSorted(this.searchableContacts);
+            this.searchableContacts = sorter.getSorted(this.searchableContacts);
         } catch (RuntimeException e) {
             sortInterrupted = true;
-        } finally {
-            Duration end = Duration.ofMillis(System.currentTimeMillis());
-            sorter.setCurrentDuration(start, end);
         }
     }
 

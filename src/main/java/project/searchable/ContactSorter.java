@@ -5,42 +5,39 @@ import java.time.Duration;
 public abstract class ContactSorter<T extends Comparable<T>> {
     private final Duration maxDuration;
     Duration currentDuration = Duration.ZERO;
-    private boolean finishedSorting;
 
     public ContactSorter(Duration duration) {
         this.maxDuration = duration;
-        this.finishedSorting = false;
     }
 
     public T[] getSorted(T[] unsortedArray) {
         Duration start = Duration.ofMillis(System.currentTimeMillis());
 
-        startSorting(unsortedArray);
-        stopWhenMaxDurationExceeded();
-        finishedSorting = true;
+        Thread timeLimitThread = getTimeLimitThread();
+        unsortedArray = startSorting(unsortedArray);
+
+        // stop thread from throwing error if sorting finished before time limit
+        timeLimitThread.interrupt();
 
         Duration end = Duration.ofMillis(System.currentTimeMillis());
         setCurrentDuration(start, end);
         return unsortedArray;
     }
 
-    private void stopWhenMaxDurationExceeded() {
-        if (maxDuration.isNegative()) {
+    private Thread getTimeLimitThread() {
+        if (maxDuration.compareTo(Duration.ZERO) < 0) {
+            setToMaxDuration();
             throw new RuntimeException();
         }
 
-        Thread timeTest = new Thread(() -> {
+        return new Thread(() -> {
             try {
                 Thread.sleep(maxDuration.toMillis());
-                if (!finishedSorting) {
-                    setToMaxDuration();
-                    throw new RuntimeException();
-                }
-            } catch (InterruptedException ignored) {
+            } catch (InterruptedException e) {
+                setToMaxDuration();
+                throw new RuntimeException();
             }
         });
-
-        timeTest.start();
     }
 
     abstract T[] startSorting(T[] unsortedArray);

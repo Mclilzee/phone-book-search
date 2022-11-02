@@ -20,6 +20,11 @@ abstract class Searcher {
         this.sorter = sorter;
     }
 
+    Searcher(Contact[] searchableContacts, Contact[] toFind) {
+        // use default bubble sorter if none specified
+        this(searchableContacts, toFind, new BubbleSorter<>(Duration.ofSeconds(1)));
+    }
+
     public Duration getSearchDuration() {
         return this.searchDuration;
     }
@@ -53,6 +58,9 @@ abstract class Searcher {
     }
 
     String getDurationString(Duration duration) {
+        if (duration.isNegative()) {
+            duration = Duration.ZERO;
+        }
         return String.format("%d min. %d sec. %d ms.", duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
     }
 

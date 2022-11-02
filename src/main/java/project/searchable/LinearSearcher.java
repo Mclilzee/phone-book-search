@@ -1,9 +1,11 @@
 package project.searchable;
 
+import java.time.Duration;
+
 public class LinearSearcher extends Searcher {
 
     public LinearSearcher(Contact[] searchableContacts, Contact[] toFind) {
-        super(searchableContacts, toFind, null);
+        super(searchableContacts, toFind);
     }
 
     @Override
