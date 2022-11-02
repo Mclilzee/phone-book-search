@@ -4,7 +4,7 @@ public class JumpSearcher extends Searcher {
 
     private boolean sortInterrupted = false;
 
-    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, ContactSorter<Contact> sorter) {
+    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, Sorter<Contact> sorter) {
         super(searchableContacts, toFind, sorter);
     }
 

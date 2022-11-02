@@ -1,6 +1,5 @@
 package project.searchable;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +43,7 @@ class BubbleSorterTest {
 
     @Test
     void withMaxDuration() {
-        ContactSorter<Contact> newSorter = sorter.withMaxDuration(Duration.ofDays(1));
+        Sorter<Contact> newSorter = sorter.withMaxDuration(Duration.ofDays(1));
         assertEquals(Duration.ofDays(1), newSorter.getMaxDuration());
     }
 }

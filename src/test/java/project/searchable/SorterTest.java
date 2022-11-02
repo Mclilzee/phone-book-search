@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ContactSorterTest {
+class SorterTest {
 
     Contact[] contacts = new Contact[]{
             new Contact("Mark zergberg"),
@@ -29,7 +29,7 @@ class ContactSorterTest {
             new Contact("Mark zergberg"),
     };
 
-    ContactSorter<Contact> sorter = new SorterTest<>(Duration.ofSeconds(10));
+    Sorter<Contact> sorter = new SpecificSorter<>(Duration.ofSeconds(10));
 
     @Test
     void sorterThrowErrorWhenExceedsTime() {
@@ -48,9 +48,9 @@ class ContactSorterTest {
         assertArrayEquals(sorter.getSorted(contacts), expected);
     }
 
-    private static class SorterTest<T extends Comparable<T>> extends ContactSorter<T> {
+    private static class SpecificSorter<T extends Comparable<T>> extends Sorter<T> {
 
-        public SorterTest(Duration duration) {
+        public SpecificSorter(Duration duration) {
             super(duration);
         }
 
@@ -60,8 +60,8 @@ class ContactSorterTest {
         }
 
         @Override
-        public ContactSorter<T> withMaxDuration(Duration maxDuration) {
-            return new SorterTest<>(maxDuration);
+        public Sorter<T> withMaxDuration(Duration maxDuration) {
+            return new SpecificSorter<>(maxDuration);
         }
     }
 }

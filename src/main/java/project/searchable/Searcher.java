@@ -10,11 +10,11 @@ abstract class Searcher {
 
     Contact[] searchableContacts;
     final Contact[] toFind;
-    final ContactSorter<Contact> sorter;
+    final Sorter<Contact> sorter;
     Duration searchDuration = Duration.ZERO;
     private int found = 0;
 
-    Searcher(Contact[] searchableContacts, Contact[] toFind, ContactSorter<Contact> sorter) {
+    Searcher(Contact[] searchableContacts, Contact[] toFind, Sorter<Contact> sorter) {
         this.searchableContacts = searchableContacts;
         this.toFind = toFind;
         this.sorter = sorter;

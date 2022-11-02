@@ -3,17 +3,17 @@ package project.searchable;
 import java.time.Duration;
 import java.util.Arrays;
 
-public abstract class ContactSorter<T extends Comparable<T>> {
+public abstract class Sorter<T extends Comparable<T>> {
     private final Duration maxDuration;
     Duration currentDuration = Duration.ZERO;
 
-    public ContactSorter(Duration duration) {
+    public Sorter(Duration duration) {
         this.maxDuration = duration;
     }
 
     abstract void startSorting(T[] unsortedArray);
 
-    public abstract ContactSorter<T> withMaxDuration(Duration maxDuration);
+    public abstract Sorter<T> withMaxDuration(Duration maxDuration);
 
     public T[] getSorted(T[] unsortedArray) throws InterruptedException {
         T[] copyArray = Arrays.copyOf(unsortedArray, unsortedArray.length);

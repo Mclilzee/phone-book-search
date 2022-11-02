@@ -2,7 +2,7 @@ package project.searchable;
 
 import java.time.Duration;
 
-public class BubbleSorter<T extends Comparable<T>> extends ContactSorter<T> {
+public class BubbleSorter<T extends Comparable<T>> extends Sorter<T> {
 
     public BubbleSorter(Duration maxDuration) {
         super(maxDuration);
@@ -32,7 +32,7 @@ public class BubbleSorter<T extends Comparable<T>> extends ContactSorter<T> {
         }
     }
 
-    public ContactSorter<T> withMaxDuration(Duration maxDuration) {
+    public Sorter<T> withMaxDuration(Duration maxDuration) {
         return new BubbleSorter<>(maxDuration);
     }
 }
