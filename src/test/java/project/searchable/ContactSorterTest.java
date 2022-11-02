@@ -56,7 +56,7 @@ class SorterTest<T extends Comparable<T>> extends ContactSorter<T> {
     }
 
     @Override
-    T[] startSorting(T[] unsortedArray) {
+    public T[] getSorted(T[] unsortedArray) {
         Arrays.sort(unsortedArray);
         return unsortedArray;
     }
