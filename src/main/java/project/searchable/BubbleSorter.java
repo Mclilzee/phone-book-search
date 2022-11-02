@@ -3,15 +3,16 @@ package project.searchable;
 import java.time.Duration;
 import java.util.Arrays;
 
-public class BubbleSorter<T extends Comparable<T>> extends ContactSorter {
+public class BubbleSorter<T extends Comparable<T>> extends ContactSorter<T> {
 
-    private Duration maxDuration = Duration.ZERO;
+    private final Duration maxDuration = Duration.ZERO;
 
     public BubbleSorter(Duration duration) {
         super(duration);
     }
-    public Contact[] getSorted(Contact[] array) {
-        Contact[] copyArray = Arrays.copyOf(array, array.length);
+
+    public T[] getSorted(T[] array) {
+        T[] copyArray = Arrays.copyOf(array, array.length);
 
         Duration start = Duration.ofMillis(System.currentTimeMillis());
         boolean quit = false;
@@ -19,8 +20,8 @@ public class BubbleSorter<T extends Comparable<T>> extends ContactSorter {
             quit = true;
 
             for (int i = 0; i < copyArray.length - 1; i++) {
-                Contact previous = copyArray[i];
-                Contact next = copyArray[i + 1];
+                T previous = copyArray[i];
+                T next = copyArray[i + 1];
                 int comparingResult = previous.compareTo(next);
 
                 if (comparingResult > 0) {
@@ -30,19 +31,19 @@ public class BubbleSorter<T extends Comparable<T>> extends ContactSorter {
                 }
 
                 if (Duration.ofMillis(System.currentTimeMillis()).minus(start).compareTo(maxDuration) > 0) {
+                    setCurrentDuration(start, maxDuration);
                     throw new RuntimeException();
                 }
             }
         }
 
+        Duration end = Duration.ofMillis(System.currentTimeMillis());
+        setCurrentDuration(start, end);
         return copyArray;
     }
 
-    public void setMaxDuration(Duration duration) {
-        this.maxDuration = duration;
-    }
-
-    public BubbleSorter withMaxDuration(Duration maxDuration) {
-        return new BubbleSorter(maxDuration);
+    @Override
+    public ContactSorter<T> withMaxDuration(Duration maxDuration) {
+        return new BubbleSorter<>(maxDuration);
     }
 }
