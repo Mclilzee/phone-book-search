@@ -1,26 +1,24 @@
 package project.searchable;
 
-public class JumpSearcher extends Searcher {
+public class JumpSearcher<T extends Comparable<T>> extends Searcher<T> {
 
-    private boolean sortInterrupted = false;
-
-    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind, Sorter<Contact> sorter) {
-        super(searchableContacts, toFind, sorter);
+    public JumpSearcher(T[] searchableContent, T[] toFind, Sorter<T> sorter) {
+        super(searchableContent, toFind, sorter);
     }
 
-    public JumpSearcher(Contact[] searchableContacts, Contact[] toFind) {
-        super(searchableContacts, toFind);
+    public JumpSearcher(T[] searchableContent, T[] toFind) {
+        super(searchableContent, toFind);
     }
 
     @Override
     public String search() {
-        bubbleSortData();
         String message;
-        if (!sortInterrupted) {
+        try {
+            searchableContent = sorter.getSorted(searchableContent);
             this.findElements();
             message = searchingMessage(this);
-        } else {
-            LinearSearcher searcher = new LinearSearcher(searchableContacts, toFind);
+        } catch (InterruptedException e) {
+            LinearSearcher<T> searcher = new LinearSearcher<>(searchableContent, toFind);
             searcher.findElements();
             message = searchingMessage(searcher);
         }
@@ -28,7 +26,7 @@ public class JumpSearcher extends Searcher {
         return message;
     }
 
-    String searchingMessage(Searcher searcher) {
+    String searchingMessage(Searcher<T> searcher) {
         StringBuilder builder = new StringBuilder("Start searching (bubble sort + jump search)...\n");
         builder.append(searcher.getFoundMessage(sorter.currentDuration)).append("\n");
         builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
@@ -40,22 +38,14 @@ public class JumpSearcher extends Searcher {
         return builder.toString();
     }
 
-    private void bubbleSortData() {
-        try {
-            this.searchableContacts = sorter.getSorted(this.searchableContacts);
-        } catch (InterruptedException e) {
-            sortInterrupted = true;
-        }
-    }
-
     @Override
-    boolean isElementInSearchableFile(Contact element) {
+    boolean isElementInSearchableFile(T element) {
         int current = 0;
         int previous = 0;
-        int skip = (int) Math.sqrt(this.searchableContacts.length);
-        int last = this.searchableContacts.length - 1;
+        int skip = (int) Math.sqrt(this.searchableContent.length);
+        int last = this.searchableContent.length - 1;
 
-        while (element.compareTo(this.searchableContacts[current]) > 0) {
+        while (element.compareTo(this.searchableContent[current]) > 0) {
             if (current == last) {
                 return false;
             }
@@ -64,7 +54,7 @@ public class JumpSearcher extends Searcher {
             current = Math.min(last, current + skip);
         }
 
-        while (element.compareTo(this.searchableContacts[current]) < 0) {
+        while (element.compareTo(this.searchableContent[current]) < 0) {
             current--;
 
             if (current == previous) {
@@ -72,6 +62,6 @@ public class JumpSearcher extends Searcher {
             }
         }
 
-        return element.equals(this.searchableContacts[current]);
+        return element.equals(this.searchableContent[current]);
     }
 }

@@ -6,23 +6,23 @@ import java.util.Arrays;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.counting;
 
-abstract class Searcher {
+abstract class Searcher<T extends Comparable<T>> {
 
-    Contact[] searchableContacts;
-    final Contact[] toFind;
-    final Sorter<Contact> sorter;
+    T[] searchableContent;
+    final T[] toFind;
+    final Sorter<T> sorter;
     Duration searchDuration = Duration.ZERO;
     private int found = 0;
 
-    Searcher(Contact[] searchableContacts, Contact[] toFind, Sorter<Contact> sorter) {
-        this.searchableContacts = searchableContacts;
+    Searcher(T[] searchableContent, T[] toFind, Sorter<T> sorter) {
+        this.searchableContent = searchableContent;
         this.toFind = toFind;
         this.sorter = sorter;
     }
 
-    Searcher(Contact[] searchableContacts, Contact[] toFind) {
+    Searcher(T[] searchableContent, T[] toFind) {
         // use default bubble sorter if none specified
-        this(searchableContacts, toFind, new BubbleSorter<>(Duration.ofSeconds(1)));
+        this(searchableContent, toFind, new BubbleSorter<>(Duration.ofSeconds(1)));
     }
 
     public Duration getSearchDuration() {
@@ -31,10 +31,6 @@ abstract class Searcher {
 
     void setSearchDuration(Duration start, Duration end) {
         this.searchDuration = end.minus(start);
-    }
-
-    public Duration getSortingDuration() {
-        return this.sorter.currentDuration;
     }
 
     int getFound() {
@@ -66,5 +62,5 @@ abstract class Searcher {
 
     abstract public String search();
 
-    abstract boolean isElementInSearchableFile(Contact element);
+    abstract boolean isElementInSearchableFile(T element);
 }

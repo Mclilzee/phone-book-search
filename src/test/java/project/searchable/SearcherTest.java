@@ -10,16 +10,15 @@ import java.time.Duration;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class SearcherTest {
 
-    private static Contact[] searchableContacts;
+    private static Contact[] searchableContent;
     private static Contact[] toFind;
 
     @BeforeAll
     static void setup() {
-        searchableContacts = new Contact[]{
+        searchableContent = new Contact[]{
                 new Contact("Dengos sheklos"),
                 new Contact("2342351", "Dongos With Long Name"),
                 new Contact("Emad doblos"),
@@ -35,7 +34,7 @@ class SearcherTest {
         };
     }
 
-    TestSearcher searcher = new TestSearcher(searchableContacts, toFind);
+    TestSearcher<Contact> searcher = new TestSearcher<>(searchableContent, toFind);
 
     @Test
     void searchDuration() {
@@ -114,7 +113,7 @@ class SearcherTest {
 
     @ParameterizedTest
     @MethodSource("provideSearcher")
-    void checkIfElementIsInArray(Searcher specificSearcher) {
+    void checkIfElementIsInArray(Searcher<Contact> specificSearcher) {
         assertTrue(specificSearcher.isElementInSearchableFile(new Contact("123421", "John Doe")));
         assertTrue(specificSearcher.isElementInSearchableFile(new Contact("123421", "Dongos With Long Name")));
         assertFalse(specificSearcher.isElementInSearchableFile(new Contact("Marksmoon Walker")));
@@ -122,15 +121,15 @@ class SearcherTest {
 
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
-                Arguments.of(new LinearSearcher(searchableContacts, toFind)),
-                Arguments.of(new JumpSearcher(searchableContacts, toFind))
+                Arguments.of(new LinearSearcher<>(searchableContent, toFind)),
+                Arguments.of(new JumpSearcher<>(searchableContent, toFind))
         );
     }
 
-    private static class TestSearcher extends Searcher {
+    private static class TestSearcher<T extends Comparable<T>> extends Searcher<T> {
 
-        TestSearcher(Contact[] searchableContacts, Contact[] toFind) {
-            super(searchableContacts, toFind);
+        TestSearcher(T[] searchableContent, T[] toFind) {
+            super(searchableContent, toFind);
         }
 
         @Override
@@ -139,7 +138,7 @@ class SearcherTest {
         }
 
         @Override
-        boolean isElementInSearchableFile(Contact element) {
+        boolean isElementInSearchableFile(T element) {
             return true;
         }
     }

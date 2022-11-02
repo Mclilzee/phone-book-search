@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JumpSearcherTest {
 
-    private static Contact[] searchableContacts;
+    private static Contact[] searchableContent;
     private static Contact[] toFind;
 
     @BeforeAll
     static void setup() {
-        searchableContacts = new Contact[]{
+        searchableContent = new Contact[]{
                 new Contact("Mark zergberg"),
                 new Contact("John Doe"),
                 new Contact("Gly marksman"),
@@ -30,7 +30,7 @@ class JumpSearcherTest {
         };
     }
 
-    JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, new BubbleSorter<>(Duration.ofDays(1)));
+    JumpSearcher<Contact> searcher = new JumpSearcher<>(searchableContent, toFind, new BubbleSorter<>(Duration.ofDays(1)));
 
     @Test
     void getProperSearchMessage() {
@@ -45,7 +45,7 @@ class JumpSearcherTest {
 
     @Test
     void getProperMessageWhenSortIsInterrupted() {
-        JumpSearcher searcher = new JumpSearcher(searchableContacts, toFind, new BubbleSorter<>(Duration.ofSeconds(-1)));
+        JumpSearcher<Contact> searcher = new JumpSearcher<>(searchableContent, toFind, new BubbleSorter<>(Duration.ofSeconds(-1)));
         String result = searcher.search();
         assertTrue(result.matches("Start searching \\(bubble sort \\+ jump search\\)\\.{3}\n" +
                 "Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +

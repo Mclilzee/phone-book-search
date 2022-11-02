@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LinearSearcherTest {
 
-    private static Contact[] searchableContacts;
+    private static Contact[] searchableContent;
     private static Contact[] toFind;
 
     @BeforeAll
     static void setup() {
-        searchableContacts = new Contact[]{
+        searchableContent = new Contact[]{
                 new Contact("Mark zergberg"),
                 new Contact("John Doe"),
                 new Contact("Gly marksman"),
@@ -28,7 +28,7 @@ class LinearSearcherTest {
         };
     }
 
-    private final LinearSearcher searcher = new LinearSearcher(searchableContacts, toFind);
+    private final LinearSearcher<Contact> searcher = new LinearSearcher<>(searchableContent, toFind);
 
     @Test
     void searchFunctionReturnCorrectString() {

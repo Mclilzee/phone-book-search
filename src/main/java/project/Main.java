@@ -7,12 +7,12 @@ public class Main {
     private static final Contact[] TO_FIND = ContactReader.readFileToContactArray("./find.txt");
 
     public static void main(String[] args) {
-        LinearSearcher linearSearcher = new LinearSearcher(SEARCHABLE_CONTACTS, TO_FIND);
+        LinearSearcher<Contact> linearSearcher = new LinearSearcher<>(SEARCHABLE_CONTACTS, TO_FIND);
         System.out.println(linearSearcher.search());
         System.out.println();
 
         Sorter<Contact> bubbleSorter = new BubbleSorter<>(linearSearcher.getSearchDuration().multipliedBy(1));
-        JumpSearcher jumpSearcher = new JumpSearcher(SEARCHABLE_CONTACTS, TO_FIND, bubbleSorter);
+        JumpSearcher<Contact> jumpSearcher = new JumpSearcher<>(SEARCHABLE_CONTACTS, TO_FIND, bubbleSorter);
         System.out.println(jumpSearcher.search());
     }
 }

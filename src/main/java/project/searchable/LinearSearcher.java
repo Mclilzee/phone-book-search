@@ -2,10 +2,10 @@ package project.searchable;
 
 import java.time.Duration;
 
-public class LinearSearcher extends Searcher {
+public class LinearSearcher<T extends Comparable<T>> extends Searcher<T> {
 
-    public LinearSearcher(Contact[] searchableContacts, Contact[] toFind) {
-        super(searchableContacts, toFind);
+    public LinearSearcher(T[] searchableContent, T[] toFind) {
+        super(searchableContent, toFind);
     }
 
     @Override
@@ -15,9 +15,9 @@ public class LinearSearcher extends Searcher {
     }
 
     @Override
-    boolean isElementInSearchableFile(Contact element) {
-        for (Contact contact : this.searchableContacts) {
-            if (contact.equals(element)) {
+    boolean isElementInSearchableFile(T element) {
+        for (T each : this.searchableContent) {
+            if (each.equals(element)) {
                 return true;
             }
         }
