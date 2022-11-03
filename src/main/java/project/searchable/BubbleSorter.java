@@ -12,6 +12,7 @@ public class BubbleSorter<T extends Comparable<T>> extends Sorter<T> {
     void startSorting(T[] unsortedArray) {
         boolean quit = false;
         while (!quit) {
+            // if no operation made, the array is sorted quit safely.
             quit = true;
 
             for (int i = 0; i < unsortedArray.length - 1; i++) {
