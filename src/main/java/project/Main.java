@@ -28,5 +28,10 @@ public class Main {
         System.out.println("Start searching (quick sort + binary search)...");
         BinarySearcher<Contact> binarySearcher = new BinarySearcher<>(SEARCHABLE_CONTACTS, TO_FIND, quickSorter);
         System.out.println(binarySearcher.search());
+        System.out.println();
+
+        System.out.println("Start searching (hashmap search)...");
+        ContactHashSearch hashSearch = new ContactHashSearch(SEARCHABLE_CONTACTS, TO_FIND);
+        System.out.println(hashSearch.search());
     }
 }
