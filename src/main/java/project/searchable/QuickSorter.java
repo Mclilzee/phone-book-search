@@ -12,9 +12,4 @@ public class QuickSorter<T extends Comparable<T>> extends Sorter<T> {
     void startSorting(T[] unsortedArray) {
 
     }
-
-    @Override
-    public Sorter<T> withMaxDuration(Duration maxDuration) {
-        return null;
-    }
 }

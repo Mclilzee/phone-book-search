@@ -43,7 +43,7 @@ class BubbleSorterTest {
 
     @Test
     void withMaxDuration() {
-        Sorter<Contact> newSorter = sorter.withMaxDuration(Duration.ofDays(1));
-        assertEquals(Duration.ofDays(1), newSorter.getMaxDuration());
+        sorter.setMaxDuration(Duration.ofDays(1));
+        assertEquals(Duration.ofDays(1), sorter.getMaxDuration());
     }
 }

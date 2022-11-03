@@ -4,8 +4,8 @@ import java.time.Duration;
 import java.util.Arrays;
 
 public abstract class Sorter<T extends Comparable<T>> {
-    private final Duration maxDuration;
-    Duration currentDuration = Duration.ZERO;
+    private Duration maxDuration;
+    private Duration currentDuration = Duration.ZERO;
 
     public Sorter(Duration duration) {
         this.maxDuration = duration;
@@ -13,7 +13,25 @@ public abstract class Sorter<T extends Comparable<T>> {
 
     abstract void startSorting(T[] unsortedArray);
 
-    public abstract Sorter<T> withMaxDuration(Duration maxDuration);
+    public void setMaxDuration(Duration maxDuration) {
+        this.maxDuration = maxDuration;
+    }
+
+    Duration getMaxDuration() {
+        return maxDuration;
+    }
+
+    Duration getCurrentDuration() {
+        return this.currentDuration;
+    }
+
+    void setCurrentDuration(Duration start, Duration end) {
+        this.currentDuration = end.minus(start);
+    }
+
+    void setCurrentDurationToMax() {
+        this.currentDuration = maxDuration.isNegative() ? Duration.ZERO : maxDuration;
+    }
 
     public T[] getSorted(T[] unsortedArray) throws InterruptedException {
         T[] copyArray = Arrays.copyOf(unsortedArray, unsortedArray.length);
@@ -32,21 +50,5 @@ public abstract class Sorter<T extends Comparable<T>> {
 
         setCurrentDuration(start, Duration.ofMillis(System.currentTimeMillis()));
         return copyArray;
-    }
-
-    Duration getMaxDuration() {
-        return maxDuration;
-    }
-
-    Duration getCurrentDuration() {
-        return this.currentDuration;
-    }
-
-    void setCurrentDuration(Duration start, Duration end) {
-        this.currentDuration = end.minus(start);
-    }
-
-    void setCurrentDurationToMax() {
-        this.currentDuration = maxDuration.isNegative() ? Duration.ZERO : maxDuration;
     }
 }

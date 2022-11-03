@@ -28,7 +28,7 @@ public class JumpSearcher<T extends Comparable<T>> extends Searcher<T> {
 
     String searchingMessage(Searcher<T> searcher) {
         StringBuilder builder = new StringBuilder();
-        builder.append(searcher.getFoundMessage(sorter.currentDuration)).append("\n");
+        builder.append(searcher.getFoundMessage(sorter.getCurrentDuration())).append("\n");
         builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
         if (searcher instanceof LinearSearcher) {
             builder.append(" - STOPPED, moved to linear search");

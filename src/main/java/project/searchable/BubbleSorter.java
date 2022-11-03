@@ -31,8 +31,4 @@ public class BubbleSorter<T extends Comparable<T>> extends Sorter<T> {
             }
         }
     }
-
-    public Sorter<T> withMaxDuration(Duration maxDuration) {
-        return new BubbleSorter<>(maxDuration);
-    }
 }
