@@ -28,6 +28,7 @@ public class ContactHashSearch extends Searcher<Contact> {
     @Override
     public String search() {
         findElements();
-        return null;
+
+        return String.format("%s\nCreating time: %s\nSearching time: %s", getFoundMessage(), getDurationString(createDuration), getDurationString(getSearchDuration()));
     }
 }

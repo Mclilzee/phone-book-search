@@ -33,7 +33,7 @@ class ContactHashSearchTest {
     @Test
     void getCorrectSearchMessage() {
         String result = searcher.search();
-        assertTrue(result.matches("Found 2 / 2 entries. Time taken: \\\\d+ min\\\\. \\\\d+ sec. \\\\d+ ms.\n" +
+        assertTrue(result.matches("Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
                 "Creating time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\.\n" +
                 "Searching time: \\d+ min\\. \\d+ sec\\. \\d+ m\\."));
     }
