@@ -29,6 +29,6 @@ public class ContactHashSearch extends Searcher<Contact> {
     public String search() {
         findElements();
 
-        return String.format("%s\nCreating time: %s\nSearching time: %s", getFoundMessage(), getDurationString(createDuration), getDurationString(getSearchDuration()));
+        return String.format("%s\nCreating time: %s\nSearching time: %s", getFoundMessage(createDuration), getDurationString(createDuration), getDurationString(getSearchDuration()));
     }
 }

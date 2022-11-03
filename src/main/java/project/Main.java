@@ -12,7 +12,7 @@ public class Main {
         System.out.println(linearSearcher.search());
         System.out.println();
 
-        Sorter<Contact> bubbleSorter = new BubbleSorter<>(linearSearcher.getSearchDuration().multipliedBy(10));
+        Sorter<Contact> bubbleSorter = new BubbleSorter<>(linearSearcher.getSearchDuration().multipliedBy(1));
         Sorter<Contact> quickSorter = new QuickSorter<>(linearSearcher.getSearchDuration().multipliedBy(10));
 
         System.out.println("Start searching (bubble sort + jump search)...");
@@ -30,7 +30,7 @@ public class Main {
         System.out.println(binarySearcher.search());
         System.out.println();
 
-        System.out.println("Start searching (hashmap search)...");
+        System.out.println("Start searching (hash table search)...");
         ContactHashSearch hashSearch = new ContactHashSearch(SEARCHABLE_CONTACTS, TO_FIND);
         System.out.println(hashSearch.search());
     }

@@ -46,8 +46,8 @@ abstract class Searcher<T extends Comparable<T>> {
         setSearchDuration(start, end);
     }
 
-    String getFoundMessage(Duration sortingDuration) {
-        String durationString = getDurationString(searchDuration.plus(sortingDuration));
+    String getFoundMessage(Duration otherDuration) {
+        String durationString = getDurationString(searchDuration.plus(otherDuration));
 
         return String.format("Found %d / %d entries. Time taken: %s",
                 this.found, this.toFind.length, durationString);
