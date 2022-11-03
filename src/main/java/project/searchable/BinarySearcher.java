@@ -18,7 +18,7 @@ public class BinarySearcher<T extends Comparable<T>> extends Searcher<T> {
 
         T compareElement;
 
-        while (startIndex <= endIndex && endIndex >= startIndex) {
+        while (endIndex >= startIndex) {
             compareElement = searchableContent[middleIndex];
 
             if (element.compareTo(compareElement) > 0) {

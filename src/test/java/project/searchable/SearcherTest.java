@@ -119,11 +119,28 @@ class SearcherTest {
         assertFalse(searcher.isElementInSearchableFile(new Contact("Marksmoon Walker")));
     }
 
+    @ParameterizedTest
+    @MethodSource("provideEmptySearcher")
+    void checkIfElementIsInEmptyArray(Searcher<Contact> searcher) {
+
+        assertFalse(searcher.isElementInSearchableFile(new Contact("123421", "John Doe")));
+        assertFalse(searcher.isElementInSearchableFile(new Contact("123421", "Dongos With Long Name")));
+        assertFalse(searcher.isElementInSearchableFile(new Contact("Marksmoon Walker")));
+    }
+
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
                 Arguments.of(new LinearSearcher<>(searchableContent, toFind)),
                 Arguments.of(new JumpSearcher<>(searchableContent, toFind)),
                 Arguments.of(new BinarySearcher<>(searchableContent, toFind))
+        );
+    }
+
+    private static Stream<Arguments> provideEmptySearcher() {
+        return Stream.of(
+                Arguments.of(new LinearSearcher<>(new Contact[0], toFind)),
+                Arguments.of(new JumpSearcher<>(new Contact[0], toFind)),
+                Arguments.of(new BinarySearcher<>(new Contact[0], toFind))
         );
     }
 

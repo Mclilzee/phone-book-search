@@ -12,6 +12,10 @@ public class JumpSearcher<T extends Comparable<T>> extends Searcher<T> {
 
     @Override
     boolean isElementInSearchableFile(T element) {
+        if (searchableContent.length == 0) {
+            return false;
+        }
+
         int current = 0;
         int previous = 0;
         int skip = (int) Math.sqrt(this.searchableContent.length);
