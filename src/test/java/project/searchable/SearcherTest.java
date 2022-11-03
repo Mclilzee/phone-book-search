@@ -132,7 +132,8 @@ class SearcherTest {
         return Stream.of(
                 Arguments.of(new LinearSearcher<>(searchableContent, toFind)),
                 Arguments.of(new JumpSearcher<>(searchableContent, toFind)),
-                Arguments.of(new BinarySearcher<>(searchableContent, toFind))
+                Arguments.of(new BinarySearcher<>(searchableContent, toFind)),
+                Arguments.of(new ContactHashSearch(searchableContent, toFind))
         );
     }
 
@@ -140,7 +141,8 @@ class SearcherTest {
         return Stream.of(
                 Arguments.of(new LinearSearcher<>(new Contact[0], toFind)),
                 Arguments.of(new JumpSearcher<>(new Contact[0], toFind)),
-                Arguments.of(new BinarySearcher<>(new Contact[0], toFind))
+                Arguments.of(new BinarySearcher<>(new Contact[0], toFind)),
+                Arguments.of(new ContactHashSearch(new Contact[0], toFind))
         );
     }
 
