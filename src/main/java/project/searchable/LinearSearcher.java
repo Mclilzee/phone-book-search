@@ -11,7 +11,7 @@ public class LinearSearcher<T extends Comparable<T>> extends Searcher<T> {
     @Override
     public String search() {
         findElements();
-        return String.format("Start searching (linear search)...\n%s", getFoundMessage(Duration.ZERO));
+        return getFoundMessage(Duration.ZERO);
     }
 
     @Override

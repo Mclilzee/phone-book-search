@@ -27,7 +27,7 @@ public class JumpSearcher<T extends Comparable<T>> extends Searcher<T> {
     }
 
     String searchingMessage(Searcher<T> searcher) {
-        StringBuilder builder = new StringBuilder("Start searching (bubble sort + jump search)...\n");
+        StringBuilder builder = new StringBuilder();
         builder.append(searcher.getFoundMessage(sorter.currentDuration)).append("\n");
         builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
         if (searcher instanceof LinearSearcher) {

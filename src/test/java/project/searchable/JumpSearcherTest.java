@@ -35,11 +35,9 @@ class JumpSearcherTest {
     @Test
     void getProperSearchMessage() {
         String result = searcher.search();
-        assertTrue(result.matches(
-                "Start searching \\(bubble sort \\+ jump search\\)\\.{3}\n" +
-                        "Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
-                        "Sorting time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\.\n" +
-                        "Searching time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\."
+        assertTrue(result.matches("Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
+                "Sorting time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\.\n" +
+                "Searching time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\."
         ));
     }
 
@@ -47,8 +45,7 @@ class JumpSearcherTest {
     void getProperMessageWhenSortIsInterrupted() {
         JumpSearcher<Contact> searcher = new JumpSearcher<>(searchableContent, toFind, new BubbleSorter<>(Duration.ofSeconds(-1)));
         String result = searcher.search();
-        assertTrue(result.matches("Start searching \\(bubble sort \\+ jump search\\)\\.{3}\n" +
-                "Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
+        assertTrue(result.matches("Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
                 "Sorting time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\. - STOPPED, moved to linear search\n" +
                 "Searching time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\."));
     }

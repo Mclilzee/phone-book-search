@@ -32,7 +32,6 @@ class LinearSearcherTest {
 
     @Test
     void searchFunctionReturnCorrectString() {
-        assertTrue(searcher.search().matches("Start searching \\(linear search\\)\\.{3}\\n" +
-                "Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
+        assertTrue(searcher.search().matches("Found 2 / 2 entries\\. Time taken: \\d+ min. \\d+ sec\\. \\d+ ms\\."));
     }
 }
