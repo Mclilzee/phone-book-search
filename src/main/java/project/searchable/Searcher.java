@@ -53,6 +53,10 @@ abstract class Searcher<T extends Comparable<T>> {
                 this.found, this.toFind.length, durationString);
     }
 
+    String getFoundMessage() {
+        return getFoundMessage(Duration.ZERO);
+    }
+
     String getDurationString(Duration duration) {
         if (duration.isNegative()) {
             duration = Duration.ZERO;

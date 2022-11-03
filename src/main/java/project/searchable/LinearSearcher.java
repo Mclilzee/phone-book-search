@@ -1,7 +1,5 @@
 package project.searchable;
 
-import java.time.Duration;
-
 public class LinearSearcher<T extends Comparable<T>> extends Searcher<T> {
 
     public LinearSearcher(T[] searchableContent, T[] toFind) {
@@ -11,7 +9,7 @@ public class LinearSearcher<T extends Comparable<T>> extends Searcher<T> {
     @Override
     public String search() {
         findElements();
-        return getFoundMessage(Duration.ZERO);
+        return getFoundMessage();
     }
 
     @Override

@@ -16,5 +16,11 @@ public class Main {
         Sorter<Contact> bubbleSorter = new BubbleSorter<>(linearSearcher.getSearchDuration().multipliedBy(1));
         JumpSearcher<Contact> jumpSearcher = new JumpSearcher<>(SEARCHABLE_CONTACTS, TO_FIND, bubbleSorter);
         System.out.println(jumpSearcher.search());
+        System.out.println();
+
+        System.out.println("Start searching (quick sort + jump search)...");
+        Sorter<Contact> quickSorter = new QuickSorter<>(linearSearcher.getSearchDuration().multipliedBy(10));
+        JumpSearcher<Contact> jumpSearchQuickSort = new JumpSearcher<>(SEARCHABLE_CONTACTS, TO_FIND, quickSorter);
+        System.out.println(jumpSearchQuickSort.search());
     }
 }
