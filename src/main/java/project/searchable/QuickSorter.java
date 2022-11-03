@@ -2,7 +2,6 @@ package project.searchable;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class QuickSorter<T extends Comparable<T>> extends Sorter<T> {
@@ -40,6 +39,10 @@ public class QuickSorter<T extends Comparable<T>> extends Sorter<T> {
 
     private void fillLists(List<T> contentList, T pivot, List<T> smaller, List<T> larger) {
         for (T t : contentList) {
+            if (Thread.interrupted()) {
+                return;
+            }
+
             if (t.compareTo(pivot) < 0) {
                 smaller.add(t);
             } else if (t.compareTo(pivot) > 0)

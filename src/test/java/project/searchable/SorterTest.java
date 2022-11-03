@@ -60,7 +60,7 @@ class SorterTest {
 
     @ParameterizedTest
     @MethodSource("provideSorter")
-    void testSortingAlgorithm(Sorter<Contact> sorter) {
+    void testSortingAlgorithm(Sorter<Contact> sorter) throws InterruptedException {
         sorter.startSorting(content);
         assertArrayEquals(expected, content);
     }
