@@ -22,27 +22,28 @@ public class QuickSorter<T extends Comparable<T>> extends Sorter<T> {
             return contentList;
         }
 
-        int pivotIndex = contentList.size() / 2;
+        return getCombinedResult(contentList);
+    }
+
+    private List<T> getCombinedResult(List<T> contentList) {
+        T pivot = contentList.get(contentList.size() / 2);
         List<T> smaller = new ArrayList<>();
         List<T> larger = new ArrayList<>();
-        T pivot = contentList.get(pivotIndex);
 
-        for (int i = 0; i < contentList.size(); i++) {
-            if (i == pivotIndex) {
-                continue;
-            }
-
-            if (contentList.get(i).compareTo(pivot) < 0) {
-                smaller.add(contentList.get(i));
-            } else {
-                larger.add(contentList.get(i));
-            }
-        }
+        fillLists(contentList, pivot, smaller, larger);
 
         List<T> combine = new ArrayList<>(quickSortList(smaller));
         combine.add(pivot);
         combine.addAll(quickSortList(larger));
-
         return combine;
+    }
+
+    private void fillLists(List<T> contentList, T pivot, List<T> smaller, List<T> larger) {
+        for (T t : contentList) {
+            if (t.compareTo(pivot) < 0) {
+                smaller.add(t);
+            } else if (t.compareTo(pivot) > 0)
+                larger.add(t);
+        }
     }
 }
