@@ -64,7 +64,32 @@ abstract class Searcher<T extends Comparable<T>> {
         return String.format("%d min. %d sec. %d ms.", duration.toMinutesPart(), duration.toSecondsPart(), duration.toMillisPart());
     }
 
-    abstract public String search();
+    public String search() {
+        String message;
+        try {
+            searchableContent = sorter.getSorted(searchableContent);
+            this.findElements();
+            message = searchingMessage(this);
+        } catch (InterruptedException e) {
+            LinearSearcher<T> searcher = new LinearSearcher<>(searchableContent, toFind);
+            searcher.findElements();
+            message = searchingMessage(searcher);
+        }
+
+        return message;
+    }
+
+    private String searchingMessage(Searcher<T> searcher) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(searcher.getFoundMessage(sorter.getCurrentDuration())).append("\n");
+        builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
+        if (searcher instanceof LinearSearcher) {
+            builder.append(" - STOPPED, moved to linear search");
+        }
+        builder.append("\nSearching time: ").append(getDurationString(searcher.searchDuration));
+
+        return builder.toString();
+    }
 
     abstract boolean isElementInSearchableFile(T element);
 }

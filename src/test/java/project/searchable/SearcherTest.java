@@ -113,17 +113,36 @@ class SearcherTest {
 
     @ParameterizedTest
     @MethodSource("provideSearcher")
-    void checkIfElementIsInArray(Searcher<Contact> specificSearcher) {
-        assertTrue(specificSearcher.isElementInSearchableFile(new Contact("123421", "John Doe")));
-        assertTrue(specificSearcher.isElementInSearchableFile(new Contact("123421", "Dongos With Long Name")));
-        assertFalse(specificSearcher.isElementInSearchableFile(new Contact("Marksmoon Walker")));
+    void checkIfElementIsInArray(Searcher<Contact> searcher) {
+        assertTrue(searcher.isElementInSearchableFile(new Contact("123421", "John Doe")));
+        assertTrue(searcher.isElementInSearchableFile(new Contact("123421", "Dongos With Long Name")));
+        assertFalse(searcher.isElementInSearchableFile(new Contact("Marksmoon Walker")));
     }
 
     private static Stream<Arguments> provideSearcher() {
         return Stream.of(
                 Arguments.of(new LinearSearcher<>(searchableContent, toFind)),
-                Arguments.of(new JumpSearcher<>(searchableContent, toFind))
+                Arguments.of(new JumpSearcher<>(searchableContent, toFind)),
+                Arguments.of(new BinarySearcher<>(searchableContent, toFind))
         );
+    }
+
+    @Test
+    void getProperSearchMessage() {
+        String result = searcher.search();
+        assertTrue(result.matches("Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
+                "Sorting time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\.\n" +
+                "Searching time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\."
+        ));
+    }
+
+    @Test
+    void getProperMessageWhenSortIsInterrupted() {
+        searcher = new TestSearcher<>(searchableContent, toFind, new BubbleSorter<>(Duration.ofSeconds(-1)));
+        String result = searcher.search();
+        assertTrue(result.matches("Found 2 / 2 entries. Time taken: \\d+ min\\. \\d+ sec. \\d+ ms.\n" +
+                "Sorting time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\. - STOPPED, moved to linear search\n" +
+                "Searching time: \\d+ min\\. \\d+ sec\\. \\d+ ms\\."));
     }
 
     private static class TestSearcher<T extends Comparable<T>> extends Searcher<T> {
@@ -132,9 +151,8 @@ class SearcherTest {
             super(searchableContent, toFind);
         }
 
-        @Override
-        public String search() {
-            return null;
+        TestSearcher(T[] searchableContent, T[] toFind, Sorter<T> sorter) {
+            super(searchableContent, toFind, sorter);
         }
 
         @Override

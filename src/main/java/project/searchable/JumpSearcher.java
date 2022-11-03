@@ -11,34 +11,6 @@ public class JumpSearcher<T extends Comparable<T>> extends Searcher<T> {
     }
 
     @Override
-    public String search() {
-        String message;
-        try {
-            searchableContent = sorter.getSorted(searchableContent);
-            this.findElements();
-            message = searchingMessage(this);
-        } catch (InterruptedException e) {
-            LinearSearcher<T> searcher = new LinearSearcher<>(searchableContent, toFind);
-            searcher.findElements();
-            message = searchingMessage(searcher);
-        }
-
-        return message;
-    }
-
-    String searchingMessage(Searcher<T> searcher) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(searcher.getFoundMessage(sorter.getCurrentDuration())).append("\n");
-        builder.append("Sorting time: ").append(getDurationString(sorter.getCurrentDuration()));
-        if (searcher instanceof LinearSearcher) {
-            builder.append(" - STOPPED, moved to linear search");
-        }
-        builder.append("\nSearching time: ").append(getDurationString(searcher.searchDuration));
-
-        return builder.toString();
-    }
-
-    @Override
     boolean isElementInSearchableFile(T element) {
         int current = 0;
         int previous = 0;
