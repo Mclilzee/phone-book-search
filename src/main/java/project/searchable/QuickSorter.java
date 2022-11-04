@@ -25,28 +25,36 @@ public class QuickSorter<T extends Comparable<T>> extends Sorter<T> {
     }
 
     private List<T> getCombinedResult(List<T> contentList) {
-        T pivot = contentList.get(contentList.size() / 2);
+        int pivotIndex = contentList.size() / 2;
         List<T> smaller = new ArrayList<>();
         List<T> larger = new ArrayList<>();
 
-        fillLists(contentList, pivot, smaller, larger);
+        fillLists(contentList, pivotIndex, smaller, larger);
 
         List<T> combine = new ArrayList<>(quickSortList(smaller));
-        combine.add(pivot);
+        combine.add(contentList.get(pivotIndex));
         combine.addAll(quickSortList(larger));
         return combine;
     }
 
-    private void fillLists(List<T> contentList, T pivot, List<T> smaller, List<T> larger) {
-        for (T t : contentList) {
+    private void fillLists(List<T> contentList, int pivotIndex, List<T> smaller, List<T> larger) {
+        T pivot = contentList.get(pivotIndex);
+        for (int i = 0; i < contentList.size(); i++) {
             if (Thread.interrupted()) {
                 return;
             }
 
-            if (t.compareTo(pivot) < 0) {
-                smaller.add(t);
-            } else if (t.compareTo(pivot) > 0)
-                larger.add(t);
+            T element = contentList.get(i);
+
+            if (pivotIndex == i) {
+                continue;
+            }
+
+            if (element.compareTo(pivot) < 0) {
+                smaller.add(element);
+            } else {
+                larger.add(element);
+            }
         }
     }
 }

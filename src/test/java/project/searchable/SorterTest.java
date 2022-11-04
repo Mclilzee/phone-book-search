@@ -18,6 +18,7 @@ class SorterTest {
             new Contact("Ahmad Asmar Zahra"),
             new Contact("Ahmad Asmar Zyad"),
             new Contact("Catman bro"),
+            new Contact("Catman bro"),
             new Contact("1234", "Gly Marksman"),
             new Contact("John Do"),
             new Contact("John Doe"),
@@ -33,6 +34,7 @@ class SorterTest {
                 new Contact("John Doe"),
                 new Contact("1234", "Gly Marksman"),
                 new Contact("Ahmad Asmar Zyad"),
+                new Contact("Catman bro"),
                 new Contact("Ahmad Asmar Zahra"),
                 new Contact("Catman bro"),
                 new Contact("John Do")
