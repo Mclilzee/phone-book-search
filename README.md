@@ -24,4 +24,34 @@ John Doe
 # Build - Run Project
 - Clone repository and navigate into repo's directory
 - Run project `$ ./gradlew run --args="path/to/phonebook path/to/search/file"`
+- `--args=""` takes arguments separated by spaces, if your path file include spaces in the name, use single quotes.
+  Example: `--args="'File with space in name' other/argument`
 
+# Example
+```console
+$ ./gradlew run --args="phonebook.txt find.txt"
+
+> Task :run
+Start searching (linear search)...
+Found 500 / 500 entries. Time taken: 0 min. 3 sec. 44 ms.
+
+Start searching (bubble sort + jump search)...
+Found 500 / 500 entries. Time taken: 0 min. 5 sec. 755 ms.
+Sorting time: 0 min. 3 sec. 44 ms. - STOPPED, moved to linear search
+Searching time: 0 min. 2 sec. 711 ms.
+
+Start searching (quick sort + jump search)...
+Found 500 / 500 entries. Time taken: 0 min. 1 sec. 311 ms.
+Sorting time: 0 min. 1 sec. 287 ms.
+Searching time: 0 min. 0 sec. 24 ms.
+
+Start searching (quick sort + binary search)...
+Found 500 / 500 entries. Time taken: 0 min. 1 sec. 135 ms.
+Sorting time: 0 min. 1 sec. 134 ms.
+Searching time: 0 min. 0 sec. 1 ms.
+
+Start searching (hash table search)...
+Found 500 / 500 entries. Time taken: 0 min. 0 sec. 320 ms.
+Creating time: 0 min. 0 sec. 319 ms.
+Searching time: 0 min. 0 sec. 1 ms.
+```
